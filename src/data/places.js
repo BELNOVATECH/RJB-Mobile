@@ -1,0 +1,38 @@
+export const PLACES = [
+  {
+    name: 'Ram Janmabhoomi Temple',
+    icon: 'business',
+    desc: 'Birthplace of Lord Ram and the main darshan destination.',
+    badge: 'Must Visit',
+    color: '#D35400',
+    distance: '1.2 km',
+    time: '6:00 AM - 10:00 PM',
+  },
+  {
+    name: 'Hanuman Garhi',
+    icon: 'flag',
+    desc: 'Hilltop temple dedicated to Lord Hanuman, close to the main market.',
+    badge: 'Popular',
+    color: '#D76424',
+    distance: '900 m',
+    time: '5:00 AM - 10:00 PM',
+  },
+  {
+    name: 'Kanak Bhawan',
+    icon: 'home',
+    desc: 'Historic palace-temple known for Ram-Sita idols and quiet courtyards.',
+    badge: 'Heritage',
+    color: '#C65A00',
+    distance: '1.8 km',
+    time: '8:00 AM - 9:00 PM',
+  },
+  {
+    name: 'Saryu Ghat',
+    icon: 'water',
+    desc: 'Riverfront for snan, evening aarti, and peaceful walks.',
+    badge: 'Evening',
+    color: '#2F7D7E',
+    distance: '2.4 km',
+    time: 'Open all day',
+  },
+];
