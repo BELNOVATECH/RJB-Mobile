@@ -11,16 +11,38 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
+
+
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
 
-  const stats = [
-    { value: '6', label: 'temples', icon: 'business' },
-    { value: '4', label: 'aarti slots', icon: 'flame' },
-    { value: '16', label: 'rooms left', icon: 'bed' },
-    { value: '8', label: 'guides', icon: 'people' },
-  ];
+ const stats = [
+  {
+    value: '6',
+    label: 'Temples',
+    icon: 'library',
+    screen: 'Temples',
+  },
+  {
+    value: '4',
+    label: 'Aarti Slots',
+    icon: 'flame',
+    screen: 'AartiSlots',
+  },
+  {
+    value: '16',
+    label: 'Rooms Left',
+    icon: 'bed',
+    screen: 'RoomDetails',
+  },
+  {
+    value: '8',
+    label: 'Guides',
+    icon: 'people',
+    screen: 'GuideDetails',
+  },
+];
 
   const services = [
     { title: 'Darshan Pass', caption: 'Temple visit slot', icon: 'ticket', bookingType: 'Darshan' },
@@ -138,12 +160,17 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.statsRow}>
-          {stats.map(item => (
-            <View key={item.label} style={styles.statCard}>
+  {stats.map(item => (
+    <TouchableOpacity
+      key={item.label}
+      style={styles.statCard}
+      activeOpacity={0.8}
+      onPress={() => navigation.navigate(item.screen)}
+    >
               <Ionicons name={item.icon} size={18} color="#D35400" />
               <Text style={styles.statValue}>{item.value}</Text>
               <Text style={styles.statLabel}>{item.label}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
 
