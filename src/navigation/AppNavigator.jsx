@@ -31,8 +31,8 @@ export default function AppNavigator() {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Temples" component={TemplesPage} />
       <Stack.Screen name="AartiSlots" component={AartiSlotsPage} />
-      <Stack.Screen name="RoomDetails" component={RoomsPage} />
-      <Stack.Screen name="GuideDetails" component={GuidesPage} />
+      <Stack.Screen name="RoomDetails" component={RoomsScreen} />
+      <Stack.Screen name="GuideDetails" component={GuidesScreen} />
 
       <Stack.Screen name="Guides" component={GuidesScreen} />
       <Stack.Screen name="Rooms" component={RoomsScreen} />

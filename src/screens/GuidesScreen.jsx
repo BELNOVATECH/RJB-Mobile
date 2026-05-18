@@ -15,7 +15,7 @@ const guidesData = [
     id: 1,
     name: 'Ramesh Sharma',
     language: 'Hindi',
-    languages: 'Hindi, Awadhi',
+    languages: 'Hindi, Awadhi, English',
     experience: '8 Years',
     specialization: 'Ram Mandir history',
     availability: 'Today 2:00 PM - 7:00 PM',
@@ -24,6 +24,7 @@ const guidesData = [
     rating: 4.9,
     available: true,
     ai: true,
+    price: '₹1500',
   },
   {
     id: 2,
@@ -38,20 +39,22 @@ const guidesData = [
     rating: 4.7,
     available: true,
     ai: false,
+    price: '₹1200',
   },
   {
     id: 3,
-    name: 'Venkatesh',
+    name: 'Venkatesh Reddy',
     language: 'Telugu',
-    languages: 'Telugu, Hindi',
+    languages: 'Telugu, Hindi, English',
     experience: '6 Years',
     specialization: 'South Indian pilgrim groups',
     availability: 'Next available 28 May',
-    approval: 'Under Review',
+    approval: 'Approved',
     reviews: 96,
     rating: 4.8,
-    available: false,
+    available: true,
     ai: true,
+    price: '₹1800',
   },
   {
     id: 4,
@@ -66,49 +69,107 @@ const guidesData = [
     rating: 4.5,
     available: true,
     ai: false,
+    price: '₹1000',
+  },
+  {
+    id: 5,
+    name: 'Arun Kumar',
+    language: 'Tamil',
+    languages: 'Tamil, English, Hindi',
+    experience: '7 Years',
+    specialization: 'Temple darshan assistance',
+    availability: 'Today 10:00 AM - 6:00 PM',
+    approval: 'Approved',
+    reviews: 110,
+    rating: 4.8,
+    available: true,
+    ai: true,
+    price: '₹1700',
+  },
+  {
+    id: 6,
+    name: 'Manjunath Gowda',
+    language: 'Kannada',
+    languages: 'Kannada, Telugu, Hindi',
+    experience: '9 Years',
+    specialization: 'Senior citizen pilgrimage support',
+    availability: 'Tomorrow 7:00 AM - 4:00 PM',
+    approval: 'Approved',
+    reviews: 140,
+    rating: 4.9,
+    available: true,
+    ai: true,
+    price: '₹1900',
+  },
+  {
+    id: 7,
+    name: 'Ajith Menon',
+    language: 'Malayalam',
+    languages: 'Malayalam, Tamil, English',
+    experience: '5 Years',
+    specialization: 'Family and group travel assistance',
+    availability: 'Today 1:00 PM - 8:00 PM',
+    approval: 'Approved',
+    reviews: 76,
+    rating: 4.6,
+    available: true,
+    ai: false,
+    price: '₹1400',
+  },
+  {
+    id: 8,
+    name: 'Pradeep Joshi',
+    language: 'English',
+    languages: 'English, Hindi, Telugu',
+    experience: '10 Years',
+    specialization: 'VIP darshan & premium guide tours',
+    availability: 'Tomorrow 9:00 AM - 9:00 PM',
+    approval: 'Approved',
+    reviews: 210,
+    rating: 5.0,
+    available: true,
+    ai: true,
+    price: '₹2500',
   },
 ];
 
-export default function GuidesScreen() {
-  const navigation = useNavigation();
-  const [selectedLanguage, setSelectedLanguage] = useState('All');
+const languages = [
+  'All',
+  'Hindi',
+  'English',
+  'Telugu',
+  'Tamil',
+  'Kannada',
+  'Malayalam',
+];
 
-  const languages = ['All', 'Hindi', 'English', 'Telugu'];
+const personCounts = [1, 2, 3, 4, 5, 6];
+
+export default function GuidesPage() {
+  const navigation = useNavigation();
+
+  const [selectedLanguage, setSelectedLanguage] = useState('All');
+  const [selectedPersons, setSelectedPersons] = useState(1);
 
   const filteredGuides =
     selectedLanguage === 'All'
       ? guidesData
       : guidesData.filter(
-          item => item.language === selectedLanguage
+          item =>
+            item.languages.includes(selectedLanguage) ||
+            item.language === selectedLanguage
         );
 
   return (
     <ScrollView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Ionicons name="people" size={28} color="#C94B13" />
-
-        <Text style={styles.headerTitle}>
-          Tour Guides
-        </Text>
+        <Text style={styles.headerTitle}>Book Tour Guides</Text>
       </View>
 
-      <View style={styles.workflowCard}>
-        <Text style={styles.workflowTitle}>Guide Registration Workflow</Text>
-        <Text style={styles.workflowText}>
-          Registration, document verification, language review, approval, and public listing are tracked here.
-        </Text>
-        <View style={styles.workflowSteps}>
-          {['Register', 'Verify', 'Approve', 'List'].map((item) => (
-            <View key={item} style={styles.workflowStep}>
-              <Ionicons name="checkmark-circle" size={16} color="#C94B13" />
-              <Text style={styles.workflowStepText}>{item}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
+      {/* Language Selection */}
+      <Text style={styles.sectionTitle}>Select Language</Text>
 
-      {/* Filters */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -119,8 +180,7 @@ export default function GuidesScreen() {
             key={index}
             style={[
               styles.filterButton,
-              selectedLanguage === lang &&
-                styles.activeFilter,
+              selectedLanguage === lang && styles.activeFilter,
             ]}
             onPress={() => setSelectedLanguage(lang)}
           >
@@ -138,16 +198,37 @@ export default function GuidesScreen() {
         ))}
       </ScrollView>
 
+      {/* Person Count */}
+      <Text style={styles.sectionTitle}>Number of Persons</Text>
+
+      <View style={styles.personContainer}>
+        {personCounts.map((count) => (
+          <TouchableOpacity
+            key={count}
+            style={[
+              styles.personButton,
+              selectedPersons === count && styles.selectedPerson,
+            ]}
+            onPress={() => setSelectedPersons(count)}
+          >
+            <Text
+              style={[
+                styles.personText,
+                selectedPersons === count && styles.selectedPersonText,
+              ]}
+            >
+              {count}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
       {/* Guide Cards */}
       {filteredGuides.map((guide) => (
         <View key={guide.id} style={styles.card}>
-
-          {/* AI Badge */}
           {guide.ai && (
             <View style={styles.aiBadge}>
-              <Text style={styles.aiBadgeText}>
-                AI Recommended
-              </Text>
+              <Text style={styles.aiBadgeText}>AI Recommended</Text>
             </View>
           )}
 
@@ -161,74 +242,50 @@ export default function GuidesScreen() {
             </View>
 
             <View style={{ flex: 1 }}>
-              <Text style={styles.name}>
-                {guide.name}
-              </Text>
-
-              <Text style={styles.language}>
-                {guide.language} Guide
-              </Text>
+              <Text style={styles.name}>{guide.name}</Text>
+              <Text style={styles.language}>{guide.language} Guide</Text>
             </View>
 
             <View style={styles.ratingBox}>
-              <Ionicons
-                name="star"
-                size={16}
-                color="#C94B13"
-              />
-
-              <Text style={styles.rating}>
-                {guide.rating}
-              </Text>
+              <Ionicons name="star" size={16} color="#C94B13" />
+              <Text style={styles.rating}>{guide.rating}</Text>
             </View>
           </View>
 
-          {/* Info */}
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>
-              Languages:
-            </Text>
+            <Text style={styles.infoLabel}>Languages:</Text>
+            <Text style={styles.infoValue}>{guide.languages}</Text>
+          </View>
 
+          <View style={styles.infoRow}>
+            <Text style={styles.infoLabel}>Experience:</Text>
+            <Text style={styles.infoValue}>{guide.experience}</Text>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.infoLabel}>Speciality:</Text>
+            <Text style={styles.infoValue}>{guide.specialization}</Text>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.infoLabel}>Calendar:</Text>
+            <Text style={styles.infoValue}>{guide.availability}</Text>
+          </View>
+
+          <View style={styles.infoRow}>
+            <Text style={styles.infoLabel}>Persons:</Text>
             <Text style={styles.infoValue}>
-              {guide.languages}
+              {selectedPersons} Pilgrims
             </Text>
           </View>
 
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>
-              Experience:
-            </Text>
-
-            <Text style={styles.infoValue}>
-              {guide.experience}
-            </Text>
+            <Text style={styles.infoLabel}>Price:</Text>
+            <Text style={styles.infoValue}>{guide.price}</Text>
           </View>
 
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>
-              Speciality:
-            </Text>
-
-            <Text style={styles.infoValue}>
-              {guide.specialization}
-            </Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>
-              Calendar:
-            </Text>
-
-            <Text style={styles.infoValue}>
-              {guide.availability}
-            </Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>
-              Status:
-            </Text>
-
+            <Text style={styles.infoLabel}>Status:</Text>
             <Text
               style={[
                 styles.infoValue,
@@ -246,19 +303,26 @@ export default function GuidesScreen() {
           </View>
 
           <View style={styles.reviewRow}>
-            <Ionicons name="chatbubbles" size={17} color="#C94B13" />
+            <Ionicons
+              name="chatbubbles"
+              size={17}
+              color="#C94B13"
+            />
             <Text style={styles.reviewText}>
               {guide.reviews} pilgrim reviews
             </Text>
           </View>
 
-          {/* Button */}
           <TouchableOpacity
             style={styles.bookButton}
             onPress={() =>
               navigation.navigate('MainTabs', {
                 screen: 'Bookings',
-                params: { bookingType: 'Guide' },
+                params: {
+                  bookingType: 'Guide',
+                  language: selectedLanguage,
+                  persons: selectedPersons,
+                },
               })
             }
           >
@@ -266,7 +330,6 @@ export default function GuidesScreen() {
               Book Guide
             </Text>
           </TouchableOpacity>
-
         </View>
       ))}
 
@@ -296,50 +359,15 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
 
+  sectionTitle: {
+    color: '#3E1908',
+    fontSize: 16,
+    fontWeight: '800',
+    marginBottom: 12,
+  },
+
   filterContainer: {
     marginBottom: 20,
-  },
-
-  workflowCard: {
-    backgroundColor: '#D76424',
-    borderRadius: 20,
-    padding: 18,
-    marginBottom: 20,
-  },
-
-  workflowTitle: {
-    color: '#3E1908',
-    fontSize: 18,
-    fontWeight: '900',
-  },
-
-  workflowText: {
-    color: '#FFEEDC',
-    marginTop: 8,
-    lineHeight: 20,
-  },
-
-  workflowSteps: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginTop: 14,
-  },
-
-  workflowStep: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFF9F2',
-    borderRadius: 14,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    gap: 5,
-  },
-
-  workflowStepText: {
-    color: '#3E1908',
-    fontSize: 12,
-    fontWeight: '800',
   },
 
   filterButton: {
@@ -357,6 +385,36 @@ const styles = StyleSheet.create({
   filterText: {
     color: '#C94B13',
     fontWeight: '700',
+  },
+
+  personContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginBottom: 20,
+  },
+
+  personButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#FFF9F2',
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  selectedPerson: {
+    backgroundColor: '#D35400',
+  },
+
+  personText: {
+    color: '#3E1908',
+    fontWeight: '800',
+    fontSize: 16,
+  },
+
+  selectedPersonText: {
+    color: '#FFF1E4',
   },
 
   card: {
