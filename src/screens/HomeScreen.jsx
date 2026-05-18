@@ -10,7 +10,7 @@ import {
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-
+import { Image } from 'react-native';
 
 
 export default function HomeScreen() {
@@ -70,11 +70,31 @@ export default function HomeScreen() {
     { temple: 'Kanak Bhawan', time: '8:00 AM - 9:00 PM' },
   ];
 
+  // const attractions = [
+  //   { title: 'Ram Janmabhoomi', text: 'Main darshan route and crowd alerts.', icon: 'business', screen: 'Map' },
+  //   { title: 'Saryu Ghat Aarti', text: 'Evening riverfront devotional visit.', icon: 'water', screen: 'Map' },
+  //   { title: 'Kanak Bhawan', text: 'Heritage temple near the inner city.', icon: 'home', screen: 'Map' },
+  // ];
   const attractions = [
-    { title: 'Ram Janmabhoomi', text: 'Main darshan route and crowd alerts.', icon: 'business', screen: 'Map' },
-    { title: 'Saryu Ghat Aarti', text: 'Evening riverfront devotional visit.', icon: 'water', screen: 'Map' },
-    { title: 'Kanak Bhawan', text: 'Heritage temple near the inner city.', icon: 'home', screen: 'Places' },
-  ];
+  {
+    title: 'Ram Janmabhoomi',
+    text: 'Main darshan route and crowd alerts.',
+    image: require('../../assets/1.avif'),
+    screen: 'Map',
+  },
+  {
+    title: 'Saryu Ghat Aarti',
+    text: 'Evening riverfront devotional visit.',
+    image: require('../../assets/5.jpg'),
+    screen: 'Map',
+  },
+  {
+    title: 'Kanak Bhawan',
+    text: 'Heritage temple near the inner city.',
+    image: require('../../assets/3.jpg'),
+    screen: 'Map',
+  },
+];
 
   const events = [
     { title: 'Ram Navami Ceremony', date: '17 Apr 2026', icon: 'calendar' },
@@ -267,27 +287,31 @@ export default function HomeScreen() {
 
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Attractions</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Places')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Temples')}>
             <Text style={styles.sectionLink}>View all</Text>
           </TouchableOpacity>
         </View>
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.attractionRow}>
-          {attractions.map(item => (
-            <TouchableOpacity
-              key={item.title}
-              style={styles.attractionCard}
-              activeOpacity={0.86}
-              onPress={() => navigation.navigate(item.screen)}
-            >
-              <View style={styles.attractionImage}>
-                <Ionicons name={item.icon} size={34} color="#fff" />
-              </View>
-              <Text style={styles.attractionTitle}>{item.title}</Text>
-              <Text style={styles.attractionText}>{item.text}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+        <ScrollView
+  horizontal
+  showsHorizontalScrollIndicator={false}
+  contentContainerStyle={styles.attractionsContainer}
+>
+  {attractions.map((item, index) => (
+    <TouchableOpacity
+      key={index}
+      style={styles.card}
+      onPress={() => navigation.navigate(item.screen)}
+    >
+      <Image source={item.image} style={styles.cardImage} />
+
+      <View style={styles.cardOverlay}>
+        <Text style={styles.cardTitle}>{item.title}</Text>
+        <Text style={styles.cardText}>{item.text}</Text>
+      </View>
+    </TouchableOpacity>
+  ))}
+</ScrollView>
 
         <Text style={styles.sectionTitle}>Upcoming Festivals</Text>
         <View style={styles.eventList}>
@@ -884,4 +908,46 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '800',
   },
+  attractionImage: {
+  width: 60,
+  height: 60,
+  borderRadius: 12,
+  resizeMode: 'cover',
+},
+card: {
+  width: 260,
+  height: 180,
+  borderRadius: 20,
+  overflow: 'hidden',
+  marginRight: 16,
+  backgroundColor: '#fff',
+  elevation: 5,
+},
+
+cardImage: {
+  width: '100%',
+  height: '100%',
+  resizeMode: 'cover',
+},
+
+cardOverlay: {
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
+  padding: 14,
+  backgroundColor: 'rgba(0,0,0,0.45)',
+},
+
+cardTitle: {
+  color: '#fff',
+  fontSize: 18,
+  fontWeight: '700',
+  marginBottom: 4,
+},
+
+cardText: {
+  color: '#f1f1f1',
+  fontSize: 13,
+  lineHeight: 18,
+},
 });
