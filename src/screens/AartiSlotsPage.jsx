@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -108,9 +109,28 @@ export default function AartiSlotsPage() {
           ))}
         </View>
 
-        <TouchableOpacity style={styles.bookButton}>
-          <Text style={styles.bookButtonText}>Book Aarti Slot</Text>
-        </TouchableOpacity>
+        <TouchableOpacity
+  style={styles.bookButton}
+  onPress={() => {
+    if (!selectedSlot) {
+      Alert.alert(
+        'Select Slot',
+        'Please select an Aarti slot before booking.'
+      );
+      return;
+    }
+
+    const slot = slots.find(item => item.id === selectedSlot);
+
+    Alert.alert(
+      'Booking Confirmed 🙏',
+      `${slot.title} booked successfully for ${selectedDevotees} devotee(s).\n\nJai Shri Ram 🚩`,
+      [{ text: 'OK' }]
+    );
+  }}
+>
+  <Text style={styles.bookButtonText}>Book Aarti Slot</Text>
+</TouchableOpacity>
 
         <View style={{ height: 30 }} />
       </ScrollView>
