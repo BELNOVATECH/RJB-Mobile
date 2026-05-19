@@ -18,7 +18,7 @@ export default function HomeScreen() {
   const stats = [
     {
       value: "6",
-      label: "Temples",
+      label: "Pilgrimages",
       icon: "library",
       screen: "Temples",
     },
@@ -30,13 +30,13 @@ export default function HomeScreen() {
     },
     {
       value: "16",
-      label: "Rooms Left",
+      label: "Cottages Left",
       icon: "bed",
       screen: "RoomDetails",
     },
     {
       value: "8",
-      label: "Guides",
+      label: "Tourist Guides",
       icon: "people",
       screen: "GuideDetails",
     },
@@ -50,19 +50,19 @@ export default function HomeScreen() {
       bookingType: "Darshan",
     },
     {
-      title: "Guides",
+      title: "Tourist Guide",
       caption: "Language matched",
       icon: "people",
       screen: "Guides",
     },
     {
-      title: "Rooms",
+      title: "Cottages",
       caption: "AI room matching",
       icon: "bed",
       screen: "Rooms",
     },
     {
-      title: "Transport",
+      title: "Travel",
       caption: "Vehicle allocation",
       icon: "car",
       screen: "Vehicles",
@@ -133,7 +133,7 @@ export default function HomeScreen() {
     { label: "Helpline", value: "1076" },
     { label: "Police", value: "112" },
     { label: "Ambulance", value: "108" },
-    { label: "Temple", value: "5 AM+" },
+    // { label: "Temple", value: "5 AM+" },
   ];
 
   const devotionalHighlights = [
