@@ -1,46 +1,30 @@
 {
   "expo": {
-    "name": "Ayodhya Dham",
+    "name": "AyodhyaDham2",
     "slug": "AyodhyaDham2",
-    "description": "A pilgrim companion for Ayodhya darshan, bookings, stays, travel, aarti, maps, news, and devotional content.",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/4.webp",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#1B0B07",
-    "primaryColor": "#C7781A",
-    "scheme": "ayodhyadham",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/4.webp",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1B0B07"
+      "backgroundColor": "#ffffff"
     },
     "ios": {
-      "bundleIdentifier": "com.yashu1369.ayodhyadham",
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/4.webp",
-        "backgroundColor": "#1B0B07"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
       },
-      "backgroundColor": "#1B0B07",
       "edgeToEdgeEnabled": true,
-      "package": "com.yashu1369.ayodhyadham"
-    },
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#1B0B07",
-      "translucent": false
-    },
-    "androidNavigationBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#1B0B07",
-      "enforceContrast": false
+      "package": "com.yashu1369.AyodhyaDham2"
     },
     "web": {
-      "favicon": "./assets/4.webp"
+      "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
