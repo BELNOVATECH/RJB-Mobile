@@ -136,28 +136,6 @@ export default function RoomsScreen() {
         </View>
       </View>
 
-      <View style={styles.formCard}>
-        <Text style={styles.sectionTitle}>Recommendation Inputs</Text>
-
-        <Text style={styles.formLabel}>Tourist Budget</Text>
-        <TextInput value={budget} onChangeText={setBudget} keyboardType="numeric" style={styles.input} />
-
-        <Text style={styles.formLabel}>Family / Group Size</Text>
-        <TextInput value={familySize} onChangeText={setFamilySize} keyboardType="numeric" style={styles.input} />
-
-        <Text style={styles.formLabel}>Stay Duration</Text>
-        <TextInput value={duration} onChangeText={setDuration} style={styles.input} />
-
-        <Text style={styles.formLabel}>Luxury / Distance Preference</Text>
-        <TextInput value={preference} onChangeText={setPreference} style={styles.input} />
-
-        <View style={styles.aiResult}>
-          <Ionicons name="checkmark-circle" size={20} color="#C94B13" />
-          <Text style={styles.aiResultText}>
-            AI suggests Deluxe Family Cottage for Rs {budget || '3000'} budget, group size {familySize || '4'}, {duration || '2 nights'}, and {preference || 'near temple'} preference.
-          </Text>
-        </View>
-      </View>
 
       <Text style={styles.sectionTitle}>Guest House / Cottage Listing</Text>
 

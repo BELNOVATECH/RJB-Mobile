@@ -269,7 +269,7 @@ export default function VehiclesScreen() {
         </View>
       ))}
 
-      <Text style={styles.sectionTitle}>Tourist Vehicle Booking</Text>
+      {/* <Text style={styles.sectionTitle}>Tourist Vehicle Booking</Text>
 
       <View style={styles.card}>
         <Text style={styles.formLabel}>Pickup Location</Text>
@@ -295,7 +295,7 @@ export default function VehiclesScreen() {
             </TouchableOpacity>
           ))}
         </View>
-      </View>
+      </View> */}
 
       <Text style={styles.sectionTitle}>Dynamic Pricing Engine</Text>
 

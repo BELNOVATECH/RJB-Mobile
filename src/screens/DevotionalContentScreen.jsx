@@ -144,16 +144,6 @@ export default function DevotionalContentScreen() {
         ))}
       </ScrollView>
 
-      <View style={styles.managerCard}>
-        <Text style={styles.sectionTitle}>Library Controls</Text>
-        <View style={styles.controlGrid}>
-          <Control icon="cloud-upload" title="Upload Audio" text="MP3 / WAV" />
-          <Control icon="videocam" title="Video Stream" text="Live / recorded" />
-          <Control icon="albums" title="Categories" text="8 content types" />
-          <Control icon="checkmark-circle" title="Publish" text="Review status" />
-        </View>
-      </View>
-
       <Text style={styles.sectionTitle}>Content Catalogue</Text>
 
       {filteredContent.map(item => (
@@ -176,6 +166,16 @@ export default function DevotionalContentScreen() {
           </View>
         </TouchableOpacity>
       ))}
+
+            <View style={styles.managerCard}>
+        <Text style={styles.sectionTitle}>Library Controls</Text>
+        <View style={styles.controlGrid}>
+          <Control icon="cloud-upload" title="Upload Audio" text="MP3 / WAV" />
+          <Control icon="videocam" title="Video Stream" text="Live / recorded" />
+          <Control icon="albums" title="Categories" text="8 content types" />
+          <Control icon="checkmark-circle" title="Publish" text="Review status" />
+        </View>
+      </View>
 
       <View style={styles.bottomSpace} />
     </ScrollView>
