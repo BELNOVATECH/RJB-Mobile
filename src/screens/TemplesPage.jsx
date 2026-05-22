@@ -113,12 +113,7 @@ export default function TemplesPage() {
                 {temple.description}
               </Text>
 
-              <TouchableOpacity
-                style={styles.button}
-                activeOpacity={0.85}
-              >
-                <Text style={styles.buttonText}>View Details</Text>
-              </TouchableOpacity>
+              
             </View>
           </View>
         ))}

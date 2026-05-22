@@ -4,28 +4,32 @@
     "slug": "AyodhyaDham2",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+
     "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
+      "image": "./assets/ss.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
+
     "ios": {
       "supportsTablet": true
     },
+
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
+      "package": "com.yashu1369.AyodhyaDham2",
       "edgeToEdgeEnabled": true,
-      "package": "com.yashu1369.AyodhyaDham2"
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/transparent.png",
+        "backgroundColor": "#ffffff"
+      }
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
     "extra": {
       "eas": {
         "projectId": "503908ff-809a-4ae9-b13d-c19adf9ce48b"

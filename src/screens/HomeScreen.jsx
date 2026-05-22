@@ -233,40 +233,6 @@ export default function HomeScreen() {
           ))}
         </View>
 
-        <View style={styles.inspirationWrap}>
-  <Text style={styles.sectionTitle}>Ramrajya Inspiration</Text>
-
-  <View style={styles.inspirationRow}>
-    <View style={styles.inspirationCard}>
-      <View style={styles.avatarCircle}>
-        <Image
-          source={require('../../assets/modi.jpg')}
-          style={styles.leaderImage}
-        />
-      </View>
-
-      <Text style={styles.inspirationName}>Shri Narendra Modi</Text>
-      <Text style={styles.inspirationText}>
-        Nation first, service first
-      </Text>
-    </View>
-
-    <View style={styles.inspirationCard}>
-      <View style={styles.avatarCircle}>
-        <Image
-          source={require('../../assets/Yogi.webp')}
-          style={styles.leaderImage}
-        />
-      </View>
-
-      <Text style={styles.inspirationName}>Shri Yogi Adityanath</Text>
-      <Text style={styles.inspirationText}>
-        Ayodhya development vision
-      </Text>
-    </View>
-  </View>
-</View>
-
         <View style={styles.supportCard}>
           <Ionicons name="heart" size={22} color="#E6531B" />
           <View style={styles.supportCopy}>
