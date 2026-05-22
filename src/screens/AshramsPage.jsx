@@ -17,8 +17,7 @@ const ashrams = [
     distance: "1.1 km",
     description:
       "Spiritual retreat center offering meditation, prayer, and pilgrim stay.",
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+    image:require('../../assets/ramashram.jpeg'),
   },
   {
     id: 2,
@@ -27,8 +26,8 @@ const ashrams = [
     distance: "2.4 km",
     description:
       "Traditional devotional ashram near major Ayodhya temple locations.",
-    image:
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+    image:require('../../assets/hanumanashram.jpeg'),
+      // "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
   },
   {
     id: 3,
@@ -37,8 +36,8 @@ const ashrams = [
     distance: "3.1 km",
     description:
       "Peaceful riverside spiritual retreat ideal for prayer and meditation.",
-    image:
-      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c",
+    image:require('../../assets/sarayuashram.jpeg'),
+      // "https://images.unsplash.com/photo-1445019980597-93fa8acb246c",
   },
   {
     id: 4,
@@ -47,8 +46,8 @@ const ashrams = [
     distance: "1.8 km",
     description:
       "Devotional ashram with spiritual guidance and pilgrim accommodation.",
-    image:
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461",
+    image:require('../../assets/sitaashram.jpeg'),
+      // "https://images.unsplash.com/photo-1578683010236-d716f9a3f461",
   },
   {
     id: 5,
@@ -57,8 +56,8 @@ const ashrams = [
     distance: "2.9 km",
     description:
       "Modern spiritual center for satsang, meditation, and group pilgrimages.",
-    image:
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+    image:require('../../assets/ayodhyaashram.jpeg'),
+      // "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
   },
   {
     id: 6,
@@ -67,8 +66,7 @@ const ashrams = [
     distance: "4.2 km",
     description:
       "Sacred retreat focused on yoga, scriptures, and spiritual learning.",
-    image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    image:require('../../assets/vedanthaashram.jpeg'),
   },
 ];
 
@@ -85,7 +83,11 @@ export default function AshramsPage() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {ashrams.map((ashram) => (
           <View key={ashram.id} style={styles.card}>
-            <Image source={{ uri: ashram.image }} style={styles.image} />
+            {/* <Image source={{ uri: ashram.image }} style={styles.image} /> */}
+            <Image
+                          source={typeof ashram.image === "string" ? { uri: ashram.image } : ashram.image}
+                          style={styles.image}
+                        />
 
             <Text style={styles.name}>{ashram.name}</Text>
 

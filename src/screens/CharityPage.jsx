@@ -18,7 +18,7 @@ const charities = [
     description:
       "Provides free meals and food distribution for pilgrims visiting Ayodhya.",
     image:
-      "https://images.unsplash.com/photo-1593113598332-cd59a93c6132",
+      "https://images.pexels.com/photos/35384548/pexels-photo-35384548.jpeg",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const charities = [
     description:
       "Support center offering assistance, guidance, and medical help.",
     image:
-      "https://images.unsplash.com/photo-1576765608866-5b51046452be",
+      "https://images.pexels.com/photos/12540563/pexels-photo-12540563.jpeg",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const charities = [
     description:
       "Community service organization focused on clothing and food donations.",
     image:
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c",
+      "https://images.pexels.com/photos/933629/pexels-photo-933629.jpeg",
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const charities = [
     description:
       "Volunteer support and crowd assistance for major temple events.",
     image:
-      "https://images.unsplash.com/photo-1469571486292-b53601020f15",
+      "https://images.pexels.com/photos/16228667/pexels-photo-16228667.jpeg",
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ const charities = [
     description:
       "Helping elderly pilgrims with transport, accommodation and food.",
     image:
-      "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2",
+      "https://images.pexels.com/photos/14332375/pexels-photo-14332375.jpeg",
   },
   {
     id: 6,
@@ -68,7 +68,7 @@ const charities = [
     description:
       "Devotional charity initiative supporting needy devotees and locals.",
     image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6",
+      "https://images.pexels.com/photos/17718731/pexels-photo-17718731.jpeg",
   },
 ];
 
