@@ -17,8 +17,7 @@ const bhawans = [
     distance: "1.2 km",
     description:
       "Spiritual accommodation and devotional gathering place for pilgrims.",
-    image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    image:require('../../assets/rambhawan.jpeg'),
   },
   {
     id: 2,
@@ -27,8 +26,7 @@ const bhawans = [
     distance: "2.0 km",
     description:
       "Pilgrim stay facility with devotional ambiance and prayer spaces.",
-    image:
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+    image:require('../../assets/sitabhawan.jpeg'),
   },
   {
     id: 3,
@@ -37,8 +35,7 @@ const bhawans = [
     distance: "1.8 km",
     description:
       "Traditional religious rest house near major pilgrimage locations.",
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+    image:require('../../assets/hanumanbhawan.jpeg'),
   },
   {
     id: 4,
@@ -48,7 +45,7 @@ const bhawans = [
     description:
       "Dedicated stay facility for pilgrims visiting Ram Mandir and Ayodhya.",
     image:
-      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c",
+      require('../../assets/kanakbhawan.jpeg'),
   },
   {
     id: 5,
@@ -58,7 +55,7 @@ const bhawans = [
     description:
       "Comfortable bhawan with spiritual surroundings for group travelers.",
     image:
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461",
+      require('../../assets/rambhawan.jpeg'),
   },
   {
     id: 6,
@@ -68,7 +65,7 @@ const bhawans = [
     description:
       "Modern devotional stay option for pilgrims and family groups.",
     image:
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+      require('../../assets/sitabhawan.jpeg'),
   },
 ];
 
@@ -85,7 +82,11 @@ export default function BhawansPage() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {bhawans.map((bhawan) => (
           <View key={bhawan.id} style={styles.card}>
-            <Image source={{ uri: bhawan.image }} style={styles.image} />
+            {/* <Image source={{ uri: bhawan.image }} style={styles.image} /> */}
+             <Image
+              source={typeof bhawan.image === "string" ? { uri: bhawan.image } : bhawan.image}
+              style={styles.image}
+            />
 
             <Text style={styles.name}>{bhawan.name}</Text>
 

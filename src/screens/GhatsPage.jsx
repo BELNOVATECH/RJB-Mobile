@@ -17,8 +17,7 @@ const ghats = [
     distance: "0.5 km",
     description:
       "Famous bathing ghat on the Sarayu River with beautiful evening aarti.",
-    image:
-      "https://images.unsplash.com/photo-1583391733981-8496ef72b6b7",
+    image:require('../../assets/ramkipaidi.jpeg'),
   },
   {
     id: 2,
@@ -27,8 +26,7 @@ const ghats = [
     distance: "8.2 km",
     description:
       "Sacred riverside ghat associated with Lord Rama’s departure.",
-    image:
-      "https://images.unsplash.com/photo-1561361513-2d000a50f0dc",
+    image:require('../../assets/guptarghat.jpeg'),
   },
   {
     id: 3,
@@ -37,8 +35,7 @@ const ghats = [
     distance: "1.8 km",
     description:
       "Historic ghat dedicated to Lakshman, attracting pilgrims daily.",
-    image:
-      "https://images.unsplash.com/photo-1609948543911-1f1b0c4d5d84",
+    image:require('../../assets/lakshmanghat.jpeg'),
   },
   {
     id: 4,
@@ -47,8 +44,7 @@ const ghats = [
     distance: "2.2 km",
     description:
       "Serene riverside ghat with peaceful devotional atmosphere.",
-    image:
-      "https://images.unsplash.com/photo-1578926375605-eaf7559b1458",
+    image:require('../../assets/jankighat.jpeg'),
   },
   {
     id: 5,
@@ -57,8 +53,7 @@ const ghats = [
     distance: "1.1 km",
     description:
       "Modern ghat area popular for boat rides and Sarayu views.",
-    image:
-      "https://images.unsplash.com/photo-1593693397690-362cb9666fc2",
+    image:require('../../assets/nayaghat.jpeg'),
   },
   {
     id: 6,
@@ -67,8 +62,7 @@ const ghats = [
     distance: "3.5 km",
     description:
       "Traditional sacred riverside location for rituals and prayer.",
-    image:
-      "https://images.unsplash.com/photo-1548013146-72479768bada",
+    image:require('../../assets/rajghat.jpeg'),
   },
 ];
 
@@ -85,7 +79,12 @@ export default function GhatsPage() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {ghats.map((ghat) => (
           <View key={ghat.id} style={styles.card}>
-            <Image source={{ uri: ghat.image }} style={styles.image} />
+            {/* <Image source={{ uri: ghat.image }} style={styles.image} /> */}
+            <Image
+              source={typeof ghat.image === "string" ? { uri: ghat.image } : ghat.image}
+              style={styles.image}
+            />
+            
 
             <Text style={styles.name}>{ghat.name}</Text>
 

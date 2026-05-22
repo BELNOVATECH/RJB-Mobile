@@ -18,7 +18,7 @@ const kunds = [
     description:
       "Ancient sacred water reservoir associated with spiritual rituals and purification.",
     image:
-      "https://images.unsplash.com/photo-1589308078059-be1415eab4c3",
+      require("../../assets/surajkund.jpeg"),
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const kunds = [
     description:
       "Historic kund believed to have deep mythological importance in Ayodhya.",
     image:
-      "https://images.unsplash.com/photo-1593693397690-362cb9666fc2",
+      require("../../assets/brahmkund.jpeg"),
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const kunds = [
     description:
       "Sacred water body associated with Goddess Sita and pilgrimage rituals.",
     image:
-      "https://images.unsplash.com/photo-1548013146-72479768bada",
+      require("../../assets/sitakund.jpeg"),
   },
   {
     id: 4,
@@ -47,8 +47,7 @@ const kunds = [
     distance: "2.8 km",
     description:
       "Peaceful devotional kund frequently visited by pilgrims for meditation.",
-    image:
-      "https://images.unsplash.com/photo-1578926375605-eaf7559b1458",
+    image:require('../../assets/vidyakund.jpeg'),
   },
   {
     id: 5,
@@ -58,7 +57,7 @@ const kunds = [
     description:
       "Traditional sacred kund connected with the Ramayana heritage.",
     image:
-      "https://images.unsplash.com/photo-1609948543911-1f1b0c4d5d84",
+      require("../../assets/dashrathkund.jpeg"),
   },
   {
     id: 6,
@@ -68,7 +67,7 @@ const kunds = [
     description:
       "Spiritual water site popular among devotees visiting nearby temples.",
     image:
-      "https://images.unsplash.com/photo-1561361513-2d000a50f0dc",
+      require("../../assets/hanumankund.jpeg"),
   },
 ];
 
@@ -85,7 +84,10 @@ export default function KundsPage() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {kunds.map((kund) => (
           <View key={kund.id} style={styles.card}>
-            <Image source={{ uri: kund.image }} style={styles.image} />
+            <Image
+  source={typeof kund.image === "string" ? { uri: kund.image } : kund.image}
+  style={styles.image}
+/>
 
             <Text style={styles.name}>{kund.name}</Text>
 
