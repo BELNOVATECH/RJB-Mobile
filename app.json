@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "AyodhyaDham2",
-    "slug": "AyodhyaDham2",
+    "name": "Ayodhya Dham",
+    "slug": "ayodhyadham2",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "icon": "./assets/icon.png",
 
     "splash": {
       "image": "./assets/ss.png",
@@ -18,7 +19,7 @@
     },
 
     "android": {
-      "package": "com.yashu1369.AyodhyaDham2",
+      "package": "com.yashu1369.ayodhyadham2",
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/transparent.png",
