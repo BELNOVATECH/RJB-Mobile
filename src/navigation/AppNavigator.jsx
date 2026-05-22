@@ -2,6 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import SplashScreen from "../screens/SplashScreen";
+import AuthScreen from "../screens/AuthScreen";
 
 import BottomTabs from "./BottomTabs";
 
@@ -18,19 +19,31 @@ import NewsScreen from "../screens/NewsScreen";
 
 import TemplesPage from "../screens/TemplesPage";
 import AartiSlotsPage from "../screens/AartiSlotsPage";
-import RoomsPage from "../screens/RoomsPage";
-import GuidesPage from "../screens/GuidesPage";
+import GhatsPage from "../screens/GhatsPage";
+import CharityPage from "../screens/CharityPage";
+import KundsPage from "../screens/KundsPage";
+import BhawansPage from "../screens/BhawansPage";
+import AshramsPage from "../screens/AshramsPage";
+
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Splash */}
       <Stack.Screen name="Splash" component={SplashScreen} />
+
+      {/* Auth */}
+      <Stack.Screen name="Auth" component={AuthScreen} />
+
+      {/* Main App */}
       <Stack.Screen name="MainTabs" component={BottomTabs} />
 
+      {/* Extra Screens */}
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Temples" component={TemplesPage} />
       <Stack.Screen name="AartiSlots" component={AartiSlotsPage} />
+
       <Stack.Screen name="RoomDetails" component={RoomsScreen} />
       <Stack.Screen name="GuideDetails" component={GuidesScreen} />
 
@@ -38,6 +51,13 @@ export default function AppNavigator() {
       <Stack.Screen name="Rooms" component={RoomsScreen} />
       <Stack.Screen name="Vehicles" component={VehiclesScreen} />
       <Stack.Screen name="Payments" component={PaymentsScreen} />
+
+      <Stack.Screen name="Ghats" component={GhatsPage} />
+      <Stack.Screen name="Charity" component={CharityPage} />
+      <Stack.Screen name="Kunds" component={KundsPage} />
+      <Stack.Screen name="Bhawans" component={BhawansPage} />
+      <Stack.Screen name="Ashrams" component={AshramsPage} />
+
       <Stack.Screen name="TravelHistory" component={TravelHistoryScreen} />
       <Stack.Screen
         name="DevotionalContent"
