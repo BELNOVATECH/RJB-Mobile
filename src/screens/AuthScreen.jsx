@@ -48,26 +48,21 @@ export default function AuthScreen({ navigation }) {
     setAuthVisible(true);
   };
 
-  const handleLogin = () => {
-    const validMobile = "9876543210";
-    const validPassword = "123456";
+ const handleLogin = () => {
+  if (!loginMobile || !loginPassword) {
+    Alert.alert("Error", "Please enter mobile number and password.");
+    return;
+  }
 
-    if (loginMobile === validMobile && loginPassword === validPassword) {
-      setAuthVisible(false);
-      Alert.alert("Success 🙏", "Login successful!", [
-        {
-          text: "OK",
-          onPress: () => navigation.replace("MainTabs"),
-        },
-      ]);
-      return;
-    }
+  setAuthVisible(false);
 
-    Alert.alert(
-      "Invalid Login",
-      "Use dummy credentials:\nMobile: 9876543210\nPassword: 123456",
-    );
-  };
+  Alert.alert("Success 🙏", "Login successful!", [
+    {
+      text: "OK",
+      onPress: () => navigation.replace("MainTabs"),
+    },
+  ]);
+};
 
   const handleSendOtp = (fieldName) => {
     Alert.alert("OTP Sent", `Dummy OTP sent for ${fieldName}.`);
