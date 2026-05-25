@@ -65,10 +65,7 @@ export default function BookingScreen({ route }) {
           <Text style={styles.intentTitle}>{activeIntent.title}</Text>
         </View>
         <Text style={styles.intentText}>{activeIntent.text}</Text>
-        <TouchableOpacity style={styles.intentButton} activeOpacity={0.85}>
-          <Ionicons name="add-circle" size={19} color="#fff" />
-          <Text style={styles.intentButtonText}>Start {bookingType} Booking</Text>
-        </TouchableOpacity>
+        
       </View>
 
       {bookingType === 'Room' && (
