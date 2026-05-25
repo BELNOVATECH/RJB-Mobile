@@ -81,18 +81,6 @@ export default function HomeScreen() {
       bookingType: "Darshan",
     },
     {
-      title: "Tourist Guide",
-      caption: "Language matched",
-      icon: "people",
-      screen: "Guides",
-    },
-    {
-      title: "Cottages",
-      caption: "AI room matching",
-      icon: "bed",
-      screen: "Rooms",
-    },
-    {
       title: "Travel",
       caption: "Vehicle allocation",
       icon: "car",
