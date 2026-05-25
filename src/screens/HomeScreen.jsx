@@ -74,12 +74,12 @@ export default function HomeScreen() {
 
 
   const services = [
-    {
-      title: "Darshan Pass",
-      caption: "Temple visit slot",
-      icon: "ticket",
-      bookingType: "Darshan",
-    },
+   {
+  title: "Darshan Pass",
+  caption: "Temple visit slot",
+  icon: "ticket",
+  screen: "DarshanBooking",
+},
     {
       title: "Travel",
       caption: "Vehicle allocation",
@@ -173,13 +173,8 @@ export default function HomeScreen() {
   };
 
   const openService = (item) => {
-    if (item.screen) {
-      navigation.navigate(item.screen);
-      return;
-    }
-
-    openBooking(item.bookingType);
-  };
+  navigation.navigate(item.screen);
+};
 
   return (
     <View style={styles.root}>
@@ -271,7 +266,7 @@ export default function HomeScreen() {
 
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>What We Offer</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Bookings")}>
+          <TouchableOpacity onPress={() => navigation.navigate("DarshanBooking")}>
             <Text style={styles.sectionLink}>Bookings</Text>
           </TouchableOpacity>
         </View>

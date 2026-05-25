@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,109 +6,120 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-} from 'react-native';
+} from "react-native";
+import { Modal } from "react-native";
 
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
 
 const roomData = [
   {
     id: 1,
-    name: 'Deluxe Family Cottage',
-    property: 'Ram Path Guest House',
-    price: 'Rs 2500/night',
-    type: 'Family Stay',
-    capacity: '4 adults + 2 children',
-    distance: '1.2 km from temple',
-    stayFit: '2-3 nights',
-    amenities: ['WiFi', 'Food', 'Parking', 'AC'],
+    name: "Deluxe Family Cottage",
+    property: "Ram Path Guest House",
+    price: "Rs 2500/night",
+    type: "Family Stay",
+    capacity: "4 adults + 2 children",
+    distance: "1.2 km from temple",
+    stayFit: "2-3 nights",
+    amenities: ["WiFi", "Food", "Parking", "AC"],
     rating: 4.8,
     roomsLeft: 4,
     available: true,
     ai: true,
-    recommendation: 'Best for family size 4-6 and medium budget.',
+    recommendation: "Best for family size 4-6 and medium budget.",
   },
   {
     id: 2,
-    name: 'Temple View Room',
-    property: 'Saryu Residency',
-    price: 'Rs 1800/night',
-    type: 'Couple Friendly',
-    capacity: '2 adults',
-    distance: '800 m from temple',
-    stayFit: '1-2 nights',
-    amenities: ['WiFi', 'Breakfast', 'Lift'],
+    name: "Temple View Room",
+    property: "Saryu Residency",
+    price: "Rs 1800/night",
+    type: "Couple Friendly",
+    capacity: "2 adults",
+    distance: "800 m from temple",
+    stayFit: "1-2 nights",
+    amenities: ["WiFi", "Breakfast", "Lift"],
     rating: 4.6,
     roomsLeft: 7,
     available: true,
     ai: false,
-    recommendation: 'Good for short stay and walking distance preference.',
+    recommendation: "Good for short stay and walking distance preference.",
   },
   {
     id: 3,
-    name: 'Budget Dharamshala Room',
-    property: 'Pilgrim Seva Sadan',
-    price: 'Rs 600/night',
-    type: 'Pilgrim Stay',
-    capacity: '3 adults',
-    distance: '2.4 km from temple',
-    stayFit: '1 night',
-    amenities: ['Shared Bath', 'Locker', 'Drinking Water'],
+    name: "Budget Dharamshala Room",
+    property: "Pilgrim Seva Sadan",
+    price: "Rs 600/night",
+    type: "Pilgrim Stay",
+    capacity: "3 adults",
+    distance: "2.4 km from temple",
+    stayFit: "1 night",
+    amenities: ["Shared Bath", "Locker", "Drinking Water"],
     rating: 4.3,
     roomsLeft: 0,
     available: false,
     ai: false,
-    recommendation: 'Lowest price option for budget-focused pilgrims.',
+    recommendation: "Lowest price option for budget-focused pilgrims.",
   },
   {
     id: 4,
-    name: 'Premium Suite Cottage',
-    property: 'Ayodhya Heritage Cottages',
-    price: 'Rs 4200/night',
-    type: 'Luxury Stay',
-    capacity: '5 adults',
-    distance: '1.6 km from temple',
-    stayFit: '3+ nights',
-    amenities: ['AC', 'Food', 'Parking', 'Private Cab'],
+    name: "Premium Suite Cottage",
+    property: "Ayodhya Heritage Cottages",
+    price: "Rs 4200/night",
+    type: "Luxury Stay",
+    capacity: "5 adults",
+    distance: "1.6 km from temple",
+    stayFit: "3+ nights",
+    amenities: ["AC", "Food", "Parking", "Private Cab"],
     rating: 4.9,
     roomsLeft: 2,
     available: true,
     ai: true,
-    recommendation: 'Best for luxury preference, senior citizens, and longer stay.',
+    recommendation:
+      "Best for luxury preference, senior citizens, and longer stay.",
   },
   {
     id: 5,
-    name: 'Group Dorm Cottage',
-    property: 'Yatri Group Stay',
-    price: 'Rs 5200/night',
-    type: 'Group Stay',
-    capacity: '10-14 pilgrims',
-    distance: '3.1 km from temple',
-    stayFit: '2+ nights',
-    amenities: ['Food', 'Parking', 'Hall', 'Guide Desk'],
+    name: "Group Dorm Cottage",
+    property: "Yatri Group Stay",
+    price: "Rs 5200/night",
+    type: "Group Stay",
+    capacity: "10-14 pilgrims",
+    distance: "3.1 km from temple",
+    stayFit: "2+ nights",
+    amenities: ["Food", "Parking", "Hall", "Guide Desk"],
     rating: 4.5,
     roomsLeft: 3,
     available: true,
     ai: true,
-    recommendation: 'AI group allocation for large families and pilgrim batches.',
+    recommendation:
+      "AI group allocation for large families and pilgrim batches.",
   },
 ];
 
-const filters = ['All', 'Family Stay', 'Group Stay', 'Luxury Stay', 'Pilgrim Stay'];
-const amenities = ['WiFi', 'Food', 'Parking', 'AC', 'Guide Desk'];
+const filters = [
+  "All",
+  "Family Stay",
+  "Group Stay",
+  "Luxury Stay",
+  "Pilgrim Stay",
+];
+const amenities = ["WiFi", "Food", "Parking", "AC", "Guide Desk"];
 
 export default function RoomsScreen() {
   const navigation = useNavigation();
-  const [selectedType, setSelectedType] = useState('All');
-  const [budget, setBudget] = useState('3000');
-  const [familySize, setFamilySize] = useState('4');
-  const [duration, setDuration] = useState('2 nights');
-  const [preference, setPreference] = useState('Near temple');
+  const [selectedType, setSelectedType] = useState("All");
+  const [budget, setBudget] = useState("3000");
+  const [familySize, setFamilySize] = useState("4");
+  const [duration, setDuration] = useState("2 nights");
+  const [preference, setPreference] = useState("Near temple");
+  const [receiptVisible, setReceiptVisible] = useState(false);
+  const [receiptData, setReceiptData] = useState(null);
 
   const filteredRooms =
-    selectedType === 'All'
+    selectedType === "All"
       ? roomData
-      : roomData.filter(room => room.type === selectedType);
+      : roomData.filter((room) => room.type === selectedType);
 
   return (
     <ScrollView
@@ -122,7 +133,9 @@ export default function RoomsScreen() {
         </View>
         <View>
           <Text style={styles.headerTitle}>Accommodation</Text>
-          <Text style={styles.headerText}>Guest houses, cottages, rooms, pricing, and AI allocation</Text>
+          <Text style={styles.headerText}>
+            Guest houses, cottages, rooms, pricing, and AI allocation
+          </Text>
         </View>
       </View>
 
@@ -131,29 +144,41 @@ export default function RoomsScreen() {
         <View style={styles.aiCopy}>
           <Text style={styles.aiTitle}>AI Room Recommendation</Text>
           <Text style={styles.aiText}>
-            Recommends rooms using tourist budget, family size, distance from temple, luxury preference, and stay duration.
+            Recommends rooms using tourist budget, family size, distance from
+            temple, luxury preference, and stay duration.
           </Text>
         </View>
       </View>
 
-
       <Text style={styles.sectionTitle}>Guest House / Cottage Listing</Text>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filterRow}>
-        {filters.map(item => (
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.filterRow}
+      >
+        {filters.map((item) => (
           <TouchableOpacity
             key={item}
-            style={[styles.filterButton, selectedType === item && styles.activeFilter]}
+            style={[
+              styles.filterButton,
+              selectedType === item && styles.activeFilter,
+            ]}
             onPress={() => setSelectedType(item)}
           >
-            <Text style={[styles.filterText, selectedType === item && styles.activeFilterText]}>
+            <Text
+              style={[
+                styles.filterText,
+                selectedType === item && styles.activeFilterText,
+              ]}
+            >
               {item}
             </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
 
-      {filteredRooms.map(room => (
+      {filteredRooms.map((room) => (
         <View key={room.id} style={styles.card}>
           {room.ai && (
             <View style={styles.aiBadge}>
@@ -183,12 +208,16 @@ export default function RoomsScreen() {
             <Info label="Capacity" value={room.capacity} />
             <Info label="Distance" value={room.distance} />
             <Info label="Duration" value={room.stayFit} />
-            <Info label="Availability" value={room.available ? `${room.roomsLeft} rooms left` : 'Booked'} danger={!room.available} />
+            <Info
+              label="Availability"
+              value={room.available ? `${room.roomsLeft} rooms left` : "Booked"}
+              danger={!room.available}
+            />
           </View>
 
           <Text style={styles.subTitle}>Amenities Management</Text>
           <View style={styles.amenityRow}>
-            {room.amenities.map(item => (
+            {room.amenities.map((item) => (
               <View key={item} style={styles.amenityPill}>
                 <Ionicons name={amenityIcon(item)} size={14} color="#C94B13" />
                 <Text style={styles.amenityText}>{item}</Text>
@@ -202,17 +231,31 @@ export default function RoomsScreen() {
           </View>
 
           <TouchableOpacity
-            style={[styles.bookButton, !room.available && styles.disabledButton]}
+            style={[
+              styles.bookButton,
+              !room.available && styles.disabledButton,
+            ]}
             disabled={!room.available}
-            onPress={() =>
-              navigation.navigate('MainTabs', {
-                screen: 'Bookings',
-                params: { bookingType: 'Room' },
-              })
-            }
+            onPress={() => {
+              const bookingId = `AYO-${Date.now().toString().slice(-6)}`;
+              const txnId = `TXN-${Math.floor(Math.random() * 999999)}`;
+
+              setReceiptData({
+                service: "Room Booking",
+                name: room.name,
+                property: room.property,
+                amount: room.price,
+                guests: room.capacity,
+                bookingId,
+                txnId,
+                date: new Date().toLocaleString(),
+              });
+
+              setReceiptVisible(true);
+            }}
           >
             <Text style={styles.bookButtonText}>
-              {room.available ? 'Book Room Online' : 'Not Available'}
+              {room.available ? "Book Room Online" : "Not Available"}
             </Text>
           </TouchableOpacity>
         </View>
@@ -229,7 +272,7 @@ export default function RoomsScreen() {
 
       <Text style={styles.sectionTitle}>Managed Amenities</Text>
       <View style={styles.amenityManager}>
-        {amenities.map(item => (
+        {amenities.map((item) => (
           <View key={item} style={styles.managerPill}>
             <Ionicons name={amenityIcon(item)} size={18} color="#C94B13" />
             <Text style={styles.managerText}>{item}</Text>
@@ -238,27 +281,96 @@ export default function RoomsScreen() {
       </View>
 
       <View style={styles.bottomSpace} />
+      <Modal visible={receiptVisible} transparent animationType="fade">
+        <View style={styles.modalOverlay}>
+          <View style={styles.receiptModal}>
+            <View style={styles.successCircle}>
+              <Ionicons name="checkmark-circle" size={85} color="#22C55E" />
+            </View>
+
+            <Text style={styles.successTitle}>Room Booked Successfully</Text>
+
+            <Text style={styles.successSub}>Jai Shri Ram 🚩</Text>
+
+            <View style={styles.receiptCard}>
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Service</Text>
+                <Text style={styles.receiptValue}>{receiptData?.service}</Text>
+              </View>
+
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Room</Text>
+                <Text style={styles.receiptValue}>{receiptData?.name}</Text>
+              </View>
+
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Property</Text>
+                <Text style={styles.receiptValue}>{receiptData?.property}</Text>
+              </View>
+
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Guests</Text>
+                <Text style={styles.receiptValue}>{receiptData?.guests}</Text>
+              </View>
+
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Amount</Text>
+                <Text style={styles.receiptValue}>{receiptData?.amount}</Text>
+              </View>
+
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Booking ID</Text>
+                <Text style={styles.receiptValue}>
+                  {receiptData?.bookingId}
+                </Text>
+              </View>
+
+              <View style={styles.receiptRow}>
+                <Text style={styles.receiptLabel}>Transaction</Text>
+                <Text style={styles.receiptValue}>{receiptData?.txnId}</Text>
+              </View>
+
+              <View style={styles.qrBox}>
+                <Ionicons name="qr-code" size={80} color="#C94B13" />
+              </View>
+            </View>
+
+            <TouchableOpacity
+              style={styles.doneBtn}
+              onPress={() => setReceiptVisible(false)}
+            >
+              <Text style={styles.doneBtnText}>Done</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
 
 function amenityIcon(item) {
-  if (item === 'WiFi') return 'wifi';
-  if (item === 'Food' || item === 'Breakfast') return 'restaurant';
-  if (item === 'Parking') return 'car';
-  if (item === 'AC') return 'snow';
-  if (item === 'Guide Desk') return 'people';
-  if (item === 'Lift') return 'arrow-up-circle';
-  if (item === 'Private Cab') return 'car-sport';
-  if (item === 'Locker') return 'lock-closed';
-  return 'checkmark-circle';
+  if (item === "WiFi") return "wifi";
+  if (item === "Food" || item === "Breakfast") return "restaurant";
+  if (item === "Parking") return "car";
+  if (item === "AC") return "snow";
+  if (item === "Guide Desk") return "people";
+  if (item === "Lift") return "arrow-up-circle";
+  if (item === "Private Cab") return "car-sport";
+  if (item === "Locker") return "lock-closed";
+  return "checkmark-circle";
 }
 
 function Info({ label, value, highlight, danger }) {
   return (
     <View style={styles.infoRow}>
       <Text style={styles.infoLabel}>{label}</Text>
-      <Text style={[styles.infoValue, highlight && styles.highlightValue, danger && styles.dangerValue]}>
+      <Text
+        style={[
+          styles.infoValue,
+          highlight && styles.highlightValue,
+          danger && styles.dangerValue,
+        ]}
+      >
         {value}
       </Text>
     </View>
@@ -277,7 +389,7 @@ function PriceLine({ label, value }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF1E4',
+    backgroundColor: "#FFF1E4",
   },
   content: {
     paddingHorizontal: 16,
@@ -285,8 +397,8 @@ const styles = StyleSheet.create({
     paddingBottom: 36,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
     marginBottom: 18,
   },
@@ -294,26 +406,26 @@ const styles = StyleSheet.create({
     width: 54,
     height: 54,
     borderRadius: 18,
-    backgroundColor: '#FFF9F2',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#FFF9F2",
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerTitle: {
-    color: '#3E1908',
+    color: "#3E1908",
     fontSize: 24,
-    fontWeight: '900',
+    fontWeight: "900",
   },
   headerText: {
-    color: '#8A5A3D',
+    color: "#8A5A3D",
     marginTop: 4,
-    fontWeight: '700',
+    fontWeight: "700",
     maxWidth: 270,
   },
   aiBanner: {
-    backgroundColor: '#D76424',
+    backgroundColor: "#D76424",
     borderRadius: 22,
     padding: 18,
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
     marginBottom: 18,
   },
@@ -321,46 +433,46 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   aiTitle: {
-    color: '#3E1908',
+    color: "#3E1908",
     fontSize: 18,
-    fontWeight: '900',
+    fontWeight: "900",
   },
   aiText: {
-    color: '#FFEEDC',
+    color: "#FFEEDC",
     marginTop: 8,
     lineHeight: 21,
   },
   formCard: {
-    backgroundColor: '#FFF9F2',
+    backgroundColor: "#FFF9F2",
     borderRadius: 20,
     padding: 16,
     marginBottom: 18,
   },
   sectionTitle: {
-    color: '#3E1908',
+    color: "#3E1908",
     fontSize: 19,
-    fontWeight: '900',
+    fontWeight: "900",
     marginBottom: 14,
     marginTop: 4,
   },
   formLabel: {
-    color: '#C94B13',
-    fontWeight: '900',
+    color: "#C94B13",
+    fontWeight: "900",
     marginTop: 12,
     marginBottom: 8,
   },
   input: {
-    backgroundColor: '#FFE2C9',
+    backgroundColor: "#FFE2C9",
     borderRadius: 14,
     paddingHorizontal: 14,
     height: 50,
-    color: '#3E1908',
-    fontWeight: '700',
+    color: "#3E1908",
+    fontWeight: "700",
   },
   aiResult: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    backgroundColor: '#FFE2C9',
+    flexDirection: "row",
+    alignItems: "flex-start",
+    backgroundColor: "#FFE2C9",
     borderRadius: 16,
     padding: 13,
     gap: 9,
@@ -368,147 +480,147 @@ const styles = StyleSheet.create({
   },
   aiResultText: {
     flex: 1,
-    color: '#70412A',
+    color: "#70412A",
     lineHeight: 20,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   filterRow: {
     gap: 10,
     paddingBottom: 18,
   },
   filterButton: {
-    backgroundColor: '#FFF9F2',
+    backgroundColor: "#FFF9F2",
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 18,
   },
   activeFilter: {
-    backgroundColor: '#D35400',
+    backgroundColor: "#D35400",
   },
   filterText: {
-    color: '#C94B13',
-    fontWeight: '800',
+    color: "#C94B13",
+    fontWeight: "800",
   },
   activeFilterText: {
-    color: '#3E1908',
+    color: "#3E1908",
   },
   card: {
-    backgroundColor: '#FFF9F2',
+    backgroundColor: "#FFF9F2",
     borderRadius: 20,
     padding: 16,
     marginBottom: 18,
-    position: 'relative',
+    position: "relative",
   },
   aiBadge: {
-    position: 'absolute',
+    position: "absolute",
     top: 14,
     right: 14,
-    backgroundColor: '#C94B13',
+    backgroundColor: "#C94B13",
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 20,
     zIndex: 1,
   },
   aiBadgeText: {
-    color: '#FFF1E4',
+    color: "#FFF1E4",
     fontSize: 11,
-    fontWeight: '900',
+    fontWeight: "900",
   },
   cardTop: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
     marginBottom: 16,
   },
   roomIcon: {
     width: 58,
     height: 58,
-    backgroundColor: '#FFE2C9',
+    backgroundColor: "#FFE2C9",
     borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   roomTitleBox: {
     flex: 1,
     paddingRight: 42,
   },
   roomName: {
-    color: '#3E1908',
+    color: "#3E1908",
     fontSize: 18,
-    fontWeight: '900',
+    fontWeight: "900",
   },
   roomProperty: {
-    color: '#8A5A3D',
+    color: "#8A5A3D",
     marginTop: 4,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   ratingBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFE2C9',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFE2C9",
     paddingHorizontal: 9,
     paddingVertical: 6,
     borderRadius: 12,
     gap: 4,
   },
   rating: {
-    color: '#3E1908',
-    fontWeight: '800',
+    color: "#3E1908",
+    fontWeight: "800",
   },
   infoGrid: {
     gap: 10,
   },
   infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 12,
   },
   infoLabel: {
-    color: '#8A5A3D',
+    color: "#8A5A3D",
     width: 92,
-    fontWeight: '800',
+    fontWeight: "800",
   },
   infoValue: {
     flex: 1,
-    color: '#3E1908',
-    fontWeight: '800',
-    textAlign: 'right',
+    color: "#3E1908",
+    fontWeight: "800",
+    textAlign: "right",
   },
   highlightValue: {
-    color: '#C94B13',
+    color: "#C94B13",
   },
   dangerValue: {
-    color: '#FF5252',
+    color: "#FF5252",
   },
   subTitle: {
-    color: '#3E1908',
-    fontWeight: '900',
+    color: "#3E1908",
+    fontWeight: "900",
     marginTop: 16,
     marginBottom: 10,
   },
   amenityRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 8,
   },
   amenityPill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFE2C9',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFE2C9",
     borderRadius: 14,
     paddingHorizontal: 10,
     paddingVertical: 8,
     gap: 5,
   },
   amenityText: {
-    color: '#70412A',
+    color: "#70412A",
     fontSize: 12,
-    fontWeight: '800',
+    fontWeight: "800",
   },
   recommendBox: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    backgroundColor: '#FFE2C9',
+    flexDirection: "row",
+    alignItems: "flex-start",
+    backgroundColor: "#FFE2C9",
     borderRadius: 15,
     padding: 12,
     gap: 8,
@@ -516,67 +628,153 @@ const styles = StyleSheet.create({
   },
   recommendText: {
     flex: 1,
-    color: '#70412A',
+    color: "#70412A",
     lineHeight: 19,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   bookButton: {
-    backgroundColor: '#D35400',
+    backgroundColor: "#D35400",
     borderRadius: 14,
     paddingVertical: 14,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 14,
   },
   disabledButton: {
-    backgroundColor: '#6B2A1A',
+    backgroundColor: "#6B2A1A",
   },
   bookButtonText: {
-    color: '#3E1908',
-    fontWeight: '900',
+    color: "#3E1908",
+    fontWeight: "900",
     fontSize: 15,
   },
   priceCard: {
-    backgroundColor: '#FFF9F2',
+    backgroundColor: "#FFF9F2",
     borderRadius: 20,
     padding: 16,
     marginBottom: 18,
   },
   priceLine: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     gap: 12,
     paddingVertical: 9,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,179,0,0.12)',
+    borderBottomColor: "rgba(255,179,0,0.12)",
   },
   priceLabel: {
-    color: '#8A5A3D',
-    fontWeight: '800',
+    color: "#8A5A3D",
+    fontWeight: "800",
   },
   priceValue: {
-    color: '#3E1908',
-    fontWeight: '900',
-    textAlign: 'right',
+    color: "#3E1908",
+    fontWeight: "900",
+    textAlign: "right",
   },
   amenityManager: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 10,
   },
   managerPill: {
-    width: '48%',
-    backgroundColor: '#FFF9F2',
+    width: "48%",
+    backgroundColor: "#FFF9F2",
     borderRadius: 16,
     padding: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
   managerText: {
-    color: '#3E1908',
-    fontWeight: '900',
+    color: "#3E1908",
+    fontWeight: "900",
   },
   bottomSpace: {
     height: 24,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.7)",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+
+  receiptModal: {
+    width: "100%",
+    backgroundColor: "#FFF9F2",
+    borderRadius: 30,
+    padding: 24,
+    alignItems: "center",
+  },
+
+  successCircle: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: "#DCFCE7",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 18,
+  },
+
+  successTitle: {
+    fontSize: 26,
+    fontWeight: "900",
+    color: "#3E1908",
+  },
+
+  successSub: {
+    color: "#C94B13",
+    fontSize: 16,
+    fontWeight: "800",
+    marginTop: 6,
+    marginBottom: 20,
+  },
+
+  receiptCard: {
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+    padding: 18,
+    borderWidth: 1,
+    borderColor: "#F4CAAA",
+  },
+
+  receiptRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+
+  receiptLabel: {
+    color: "#8A5A3D",
+    fontWeight: "700",
+  },
+
+  receiptValue: {
+    color: "#3E1908",
+    fontWeight: "900",
+    maxWidth: "60%",
+    textAlign: "right",
+  },
+
+  qrBox: {
+    alignItems: "center",
+    marginTop: 16,
+  },
+
+  doneBtn: {
+    width: "100%",
+    backgroundColor: "#D35400",
+    paddingVertical: 16,
+    borderRadius: 18,
+    alignItems: "center",
+    marginTop: 20,
+  },
+
+  doneBtnText: {
+    color: "#FFF",
+    fontWeight: "900",
+    fontSize: 16,
   },
 });

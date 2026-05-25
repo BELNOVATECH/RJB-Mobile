@@ -24,6 +24,7 @@ import CharityPage from "../screens/CharityPage";
 import KundsPage from "../screens/KundsPage";
 import BhawansPage from "../screens/BhawansPage";
 import AshramsPage from "../screens/AshramsPage";
+import DarshanBookingScreen from "../screens/DarshanBookingScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,8 @@ export default function AppNavigator() {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Temples" component={TemplesPage} />
       <Stack.Screen name="AartiSlots" component={AartiSlotsPage} />
+
+        <Stack.Screen name="DarshanBooking" component={DarshanBookingScreen} />
 
       <Stack.Screen name="RoomDetails" component={RoomsScreen} />
       <Stack.Screen name="GuideDetails" component={GuidesScreen} />
