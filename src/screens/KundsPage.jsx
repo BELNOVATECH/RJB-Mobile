@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,8 +18,9 @@ const kunds = [
     distance: "2.4 km",
     description:
       "Ancient sacred water reservoir associated with spiritual rituals and purification.",
-    image:
-      require("../../assets/surajkund.jpeg"),
+    image: require("../../assets/surajkund.jpeg"),
+    lat: 26.7908,
+    lng: 82.1916,
   },
   {
     id: 2,
@@ -27,8 +29,9 @@ const kunds = [
     distance: "1.9 km",
     description:
       "Historic kund believed to have deep mythological importance in Ayodhya.",
-    image:
-      require("../../assets/brahmkund.jpeg"),
+    image: require("../../assets/brahmkund.jpeg"),
+    lat: 26.8019,
+    lng: 82.2061,
   },
   {
     id: 3,
@@ -37,8 +40,9 @@ const kunds = [
     distance: "3.1 km",
     description:
       "Sacred water body associated with Goddess Sita and pilgrimage rituals.",
-    image:
-      require("../../assets/sitakund.jpeg"),
+    image: require("../../assets/sitakund.jpeg"),
+    lat: 26.7954,
+    lng: 82.1987,
   },
   {
     id: 4,
@@ -47,7 +51,9 @@ const kunds = [
     distance: "2.8 km",
     description:
       "Peaceful devotional kund frequently visited by pilgrims for meditation.",
-    image:require('../../assets/vidyakund.jpeg'),
+    image: require("../../assets/vidyakund.jpeg"),
+    lat: 26.7936,
+    lng: 82.1959,
   },
   {
     id: 5,
@@ -56,8 +62,9 @@ const kunds = [
     distance: "4.0 km",
     description:
       "Traditional sacred kund connected with the Ramayana heritage.",
-    image:
-      require("../../assets/dashrathkund.jpeg"),
+    image: require("../../assets/dashrathkund.jpeg"),
+    lat: 26.7891,
+    lng: 82.1898,
   },
   {
     id: 6,
@@ -66,8 +73,9 @@ const kunds = [
     distance: "2.2 km",
     description:
       "Spiritual water site popular among devotees visiting nearby temples.",
-    image:
-      require("../../assets/hanumankund.jpeg"),
+    image: require("../../assets/hanumankund.jpeg"),
+    lat: 26.7985,
+    lng: 82.2029,
   },
 ];
 
@@ -102,6 +110,17 @@ export default function KundsPage() {
             </View>
 
             <Text style={styles.description}>{kund.description}</Text>
+            <TouchableOpacity
+  style={styles.button}
+  onPress={() =>
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&destination=${kund.lat},${kund.lng}`
+    )
+  }
+>
+  <Ionicons name="navigate" size={18} color="#FFF" />
+  <Text style={styles.buttonText}>Navigate</Text>
+</TouchableOpacity>
 
             
           </View>
@@ -169,12 +188,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 16,
   },
-  button: {
-    backgroundColor: "#EA580C",
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: "center",
-  },
+button: {
+  backgroundColor: "#EA580C",
+  paddingVertical: 14,
+  borderRadius: 14,
+  alignItems: "center",
+  flexDirection: "row",
+  justifyContent: "center",
+  gap: 8,
+},
   buttonText: {
     color: "#FFF",
     fontWeight: "800",

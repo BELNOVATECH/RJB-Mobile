@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,7 +18,9 @@ const ghats = [
     distance: "0.5 km",
     description:
       "Famous bathing ghat on the Sarayu River with beautiful evening aarti.",
-    image:require('../../assets/ramkipaidi.jpeg'),
+    image: require("../../assets/ramkipaidi.jpeg"),
+    lat: 26.8017,
+    lng: 82.2049,
   },
   {
     id: 2,
@@ -26,7 +29,9 @@ const ghats = [
     distance: "8.2 km",
     description:
       "Sacred riverside ghat associated with Lord Rama’s departure.",
-    image:require('../../assets/guptarghat.jpeg'),
+    image: require("../../assets/guptarghat.jpeg"),
+    lat: 26.7735,
+    lng: 82.1457,
   },
   {
     id: 3,
@@ -35,7 +40,9 @@ const ghats = [
     distance: "1.8 km",
     description:
       "Historic ghat dedicated to Lakshman, attracting pilgrims daily.",
-    image:require('../../assets/lakshmanghat.jpeg'),
+    image: require("../../assets/lakshmanghat.jpeg"),
+    lat: 26.8034,
+    lng: 82.2072,
   },
   {
     id: 4,
@@ -44,7 +51,9 @@ const ghats = [
     distance: "2.2 km",
     description:
       "Serene riverside ghat with peaceful devotional atmosphere.",
-    image:require('../../assets/jankighat.jpeg'),
+    image: require("../../assets/jankighat.jpeg"),
+    lat: 26.7994,
+    lng: 82.2098,
   },
   {
     id: 5,
@@ -53,7 +62,9 @@ const ghats = [
     distance: "1.1 km",
     description:
       "Modern ghat area popular for boat rides and Sarayu views.",
-    image:require('../../assets/nayaghat.jpeg'),
+    image: require("../../assets/nayaghat.jpeg"),
+    lat: 26.8051,
+    lng: 82.2103,
   },
   {
     id: 6,
@@ -62,7 +73,9 @@ const ghats = [
     distance: "3.5 km",
     description:
       "Traditional sacred riverside location for rituals and prayer.",
-    image:require('../../assets/rajghat.jpeg'),
+    image: require("../../assets/rajghat.jpeg"),
+    lat: 26.8078,
+    lng: 82.2145,
   },
 ];
 
@@ -99,6 +112,18 @@ export default function GhatsPage() {
             </View>
 
             <Text style={styles.description}>{ghat.description}</Text>
+
+            <TouchableOpacity
+  style={styles.button}
+  onPress={() =>
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&destination=${ghat.lat},${ghat.lng}`
+    )
+  }
+>
+  <Ionicons name="navigate" size={18} color="#FFF" />
+  <Text style={styles.buttonText}>Navigate</Text>
+</TouchableOpacity>
 
             
           </View>
@@ -176,12 +201,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
-  button: {
-    backgroundColor: "#EA580C",
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: "center",
-  },
+button: {
+  backgroundColor: "#EA580C",
+  paddingVertical: 14,
+  borderRadius: 14,
+  alignItems: "center",
+  flexDirection: "row",
+  justifyContent: "center",
+  gap: 8,
+},
 
   buttonText: {
     color: "#FFF",

@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -19,6 +20,8 @@ const charities = [
       "Provides free meals and food distribution for pilgrims visiting Ayodhya.",
     image:
       "https://images.pexels.com/photos/35384548/pexels-photo-35384548.jpeg",
+    lat: 26.7992,
+    lng: 82.2031,
   },
   {
     id: 2,
@@ -29,6 +32,8 @@ const charities = [
       "Support center offering assistance, guidance, and medical help.",
     image:
       "https://images.pexels.com/photos/12540563/pexels-photo-12540563.jpeg",
+    lat: 26.8018,
+    lng: 82.2057,
   },
   {
     id: 3,
@@ -39,6 +44,8 @@ const charities = [
       "Community service organization focused on clothing and food donations.",
     image:
       "https://images.pexels.com/photos/933629/pexels-photo-933629.jpeg",
+    lat: 26.8042,
+    lng: 82.2091,
   },
   {
     id: 4,
@@ -49,6 +56,8 @@ const charities = [
       "Volunteer support and crowd assistance for major temple events.",
     image:
       "https://images.pexels.com/photos/16228667/pexels-photo-16228667.jpeg",
+    lat: 26.7974,
+    lng: 82.2018,
   },
   {
     id: 5,
@@ -59,6 +68,8 @@ const charities = [
       "Helping elderly pilgrims with transport, accommodation and food.",
     image:
       "https://images.pexels.com/photos/14332375/pexels-photo-14332375.jpeg",
+    lat: 26.7931,
+    lng: 82.1972,
   },
   {
     id: 6,
@@ -69,6 +80,8 @@ const charities = [
       "Devotional charity initiative supporting needy devotees and locals.",
     image:
       "https://images.pexels.com/photos/17718731/pexels-photo-17718731.jpeg",
+    lat: 26.8063,
+    lng: 82.2122,
   },
 ];
 
@@ -100,6 +113,17 @@ export default function CharityPage() {
             </View>
 
             <Text style={styles.description}>{charity.description}</Text>
+            <TouchableOpacity
+  style={styles.button}
+  onPress={() =>
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&destination=${charity.lat},${charity.lng}`
+    )
+  }
+>
+  <Ionicons name="navigate" size={18} color="#FFF" />
+  <Text style={styles.buttonText}>Navigate</Text>
+</TouchableOpacity>
 
             
           </View>
@@ -167,12 +191,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 16,
   },
-  button: {
-    backgroundColor: "#EA580C",
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: "center",
-  },
+button: {
+  backgroundColor: "#EA580C",
+  paddingVertical: 14,
+  borderRadius: 14,
+  alignItems: "center",
+  flexDirection: "row",
+  justifyContent: "center",
+  gap: 8,
+},
   buttonText: {
     color: "#FFF",
     fontWeight: "800",

@@ -34,14 +34,7 @@ export default function AuthScreen({ navigation }) {
   const [dob, setDob] = useState("");
   const [regPassword, setRegPassword] = useState("");
 
-  const stats = [
-    { value: "6+", label: "Temples", screen: "Temples" },
-    { value: "12+", label: "Ghats", screen: "Ghats" },
-    { value: "25+", label: "Charity", screen: "Charity" },
-    { value: "8+", label: "Kunds", screen: "Kunds" },
-    { value: "15+", label: "Bhawans", screen: "Bhawans" },
-    { value: "20+", label: "Ashrams", screen: "Ashrams" },
-  ];
+ 
 
   const idTypes = ["Aadhaar", "PAN", "Driving License"];
 
@@ -156,19 +149,7 @@ export default function AuthScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.sectionTitle}>Sacred Highlights</Text>
-        <View style={styles.statsGrid}>
-          {stats.map((item) => (
-            <TouchableOpacity
-              key={item.label}
-              style={styles.statCard}
-              onPress={() => navigation.navigate(item.screen)}
-            >
-              <Text style={styles.statValue}>{item.value}</Text>
-              <Text style={styles.statLabel}>{item.label}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+      
 
         <View style={styles.inspirationWrap}>
           <Text style={styles.sectionTitle}>Ramrajya Inspiration</Text>
@@ -561,31 +542,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 10,
     marginBottom: 16,
-  },
-  statsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-  },
-  statCard: {
-    width: "31%",
-    backgroundColor: "#FFF9F2",
-    borderRadius: 18,
-    paddingVertical: 20,
-    alignItems: "center",
-    marginBottom: 14,
-    elevation: 3,
-  },
-  statValue: {
-    fontSize: 24,
-    fontWeight: "900",
-    color: "#D35400",
-  },
-  statLabel: {
-    color: "#8A5A3D",
-    marginTop: 6,
-    fontWeight: "700",
   },
   inspirationRow: {
     flexDirection: "row",
