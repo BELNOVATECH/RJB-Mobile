@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Modal,
 } from 'react-native';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -141,6 +142,8 @@ const vehicleTypes = ['All', 'Auto', 'Car', 'Mini Bus', 'Bus', 'EV Vehicle', 'Lu
 
 export default function VehiclesScreen() {
   const navigation = useNavigation();
+  const [receiptVisible, setReceiptVisible] = useState(false);
+const [receiptData, setReceiptData] = useState(null);
   const [selectedType, setSelectedType] = useState('All');
   const [pickup, setPickup] = useState('Ayodhya Junction');
   const [drop, setDrop] = useState('Ram Janmabhoomi');
@@ -230,12 +233,24 @@ export default function VehiclesScreen() {
 
           <TouchableOpacity
             style={styles.bookBtn}
-            onPress={() =>
-              navigation.navigate('MainTabs', {
-                screen: 'Bookings',
-                params: { bookingType: 'Vehicle' },
-              })
-            }
+            onPress={() => {
+  const bookingId = `AYO-${Date.now().toString().slice(-6)}`;
+  const txnId = `TXN-${Math.floor(Math.random() * 999999)}`;
+
+  setReceiptData({
+    service: "Vehicle Booking",
+    vehicle: vehicle.type,
+    model: vehicle.model,
+    regNo: vehicle.regNo,
+    amount: vehicle.price,
+    eta: vehicle.eta,
+    bookingId,
+    txnId,
+    date: new Date().toLocaleString(),
+  });
+
+  setReceiptVisible(true);
+}}
           >
             <Text style={styles.bookBtnText}>Book Vehicle</Text>
           </TouchableOpacity>
@@ -321,6 +336,100 @@ export default function VehiclesScreen() {
         <Monitor icon="time" title="ETA" text="Arrival estimate active" />
         <Monitor icon="warning" title="Emergency SOS" text="Driver support alert" />
       </View>
+      <Modal visible={receiptVisible} transparent animationType="fade">
+  <View style={styles.modalOverlay}>
+    <View style={styles.receiptModal}>
+      <View style={styles.successCircle}>
+        <Ionicons
+          name="checkmark-circle"
+          size={85}
+          color="#22C55E"
+        />
+      </View>
+
+      <Text style={styles.successTitle}>
+        Vehicle Booked Successfully
+      </Text>
+
+      <Text style={styles.successSub}>
+        Jai Shri Ram 🚩
+      </Text>
+
+      <View style={styles.receiptCard}>
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Service</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.service}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Vehicle</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.vehicle}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Model</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.model}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Reg No</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.regNo}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Amount</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.amount}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>ETA</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.eta}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Booking ID</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.bookingId}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Transaction</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.txnId}
+          </Text>
+        </View>
+
+        <View style={styles.qrBox}>
+          <Ionicons
+            name="qr-code"
+            size={80}
+            color="#C94B13"
+          />
+        </View>
+      </View>
+
+      <TouchableOpacity
+        style={styles.doneBtn}
+        onPress={() => setReceiptVisible(false)}
+      >
+        <Text style={styles.doneBtnText}>Done</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
 
       <View style={styles.bottomSpace} />
     </ScrollView>
@@ -701,4 +810,90 @@ const styles = StyleSheet.create({
   bottomSpace: {
     height: 30,
   },
+  modalOverlay: {
+  flex: 1,
+  backgroundColor: "rgba(0,0,0,0.7)",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: 20,
+},
+
+receiptModal: {
+  width: "100%",
+  backgroundColor: "#FFF9F2",
+  borderRadius: 30,
+  padding: 24,
+  alignItems: "center",
+},
+
+successCircle: {
+  width: 120,
+  height: 120,
+  borderRadius: 60,
+  backgroundColor: "#DCFCE7",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: 18,
+},
+
+successTitle: {
+  fontSize: 26,
+  fontWeight: "900",
+  color: "#3E1908",
+},
+
+successSub: {
+  color: "#C94B13",
+  fontSize: 16,
+  fontWeight: "800",
+  marginTop: 6,
+  marginBottom: 20,
+},
+
+receiptCard: {
+  width: "100%",
+  backgroundColor: "#FFFFFF",
+  borderRadius: 20,
+  padding: 18,
+  borderWidth: 1,
+  borderColor: "#F4CAAA",
+},
+
+receiptRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  marginBottom: 12,
+},
+
+receiptLabel: {
+  color: "#8A5A3D",
+  fontWeight: "700",
+},
+
+receiptValue: {
+  color: "#3E1908",
+  fontWeight: "900",
+  maxWidth: "60%",
+  textAlign: "right",
+},
+
+qrBox: {
+  alignItems: "center",
+  marginTop: 16,
+},
+
+doneBtn: {
+  width: "100%",
+  backgroundColor: "#D35400",
+  paddingVertical: 16,
+  borderRadius: 18,
+  alignItems: "center",
+  marginTop: 20,
+},
+
+doneBtnText: {
+  color: "#FFF",
+  fontWeight: "900",
+  fontSize: 16,
+},
 });

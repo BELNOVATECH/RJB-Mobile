@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import { Modal } from "react-native";
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -150,6 +151,8 @@ export default function GuidesPage() {
 
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [selectedPersons, setSelectedPersons] = useState(1);
+  const [receiptVisible, setReceiptVisible] = useState(false);
+const [receiptData, setReceiptData] = useState(null);
 
   const filteredGuides =
     selectedLanguage === 'All'
@@ -315,16 +318,22 @@ export default function GuidesPage() {
 
           <TouchableOpacity
             style={styles.bookButton}
-            onPress={() =>
-              navigation.navigate('MainTabs', {
-                screen: 'Bookings',
-                params: {
-                  bookingType: 'Guide',
-                  language: selectedLanguage,
-                  persons: selectedPersons,
-                },
-              })
-            }
+            onPress={() => {
+  const bookingId = `AYO-${Date.now().toString().slice(-6)}`;
+  const txnId = `TXN-${Math.floor(Math.random() * 999999)}`;
+
+  setReceiptData({
+    service: "Guide Booking",
+    name: guide.name,
+    amount: guide.price,
+    persons: selectedPersons,
+    bookingId,
+    txnId,
+    date: new Date().toLocaleString(),
+  });
+
+  setReceiptVisible(true);
+}}
           >
             <Text style={styles.bookButtonText}>
               Book Guide
@@ -334,6 +343,97 @@ export default function GuidesPage() {
       ))}
 
       <View style={{ height: 40 }} />
+      <Modal
+  visible={receiptVisible}
+  transparent
+  animationType="fade"
+>
+  <View style={styles.modalOverlay}>
+    <View style={styles.receiptModal}>
+      <View style={styles.successCircle}>
+        <Ionicons
+          name="checkmark-circle"
+          size={85}
+          color="#22C55E"
+        />
+      </View>
+
+      <Text style={styles.successTitle}>
+        Booking Confirmed
+      </Text>
+
+      <Text style={styles.successSub}>
+        Jai Shri Ram 🚩
+      </Text>
+
+      <View style={styles.receiptCard}>
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Service</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.service}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Guide</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.name}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Pilgrims</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.persons}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Amount</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.amount}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Booking ID</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.bookingId}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Transaction</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.txnId}
+          </Text>
+        </View>
+
+        <View style={styles.receiptRow}>
+          <Text style={styles.receiptLabel}>Date</Text>
+          <Text style={styles.receiptValue}>
+            {receiptData?.date}
+          </Text>
+        </View>
+
+        <View style={styles.qrBox}>
+          <Ionicons
+            name="qr-code"
+            size={80}
+            color="#C94B13"
+          />
+        </View>
+      </View>
+
+      <TouchableOpacity
+        style={styles.doneBtn}
+        onPress={() => setReceiptVisible(false)}
+      >
+        <Text style={styles.doneBtnText}>Done</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
     </ScrollView>
   );
 }
@@ -524,4 +624,91 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 15,
   },
+  modalOverlay: {
+  flex: 1,
+  backgroundColor: "rgba(0,0,0,0.65)",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: 20,
+},
+
+receiptModal: {
+  width: "100%",
+  backgroundColor: "#FFF9F2",
+  borderRadius: 30,
+  padding: 24,
+  alignItems: "center",
+  elevation: 20,
+},
+
+successCircle: {
+  width: 120,
+  height: 120,
+  borderRadius: 60,
+  backgroundColor: "#DCFCE7",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: 18,
+},
+
+successTitle: {
+  fontSize: 28,
+  fontWeight: "900",
+  color: "#3E1908",
+},
+
+successSub: {
+  color: "#C94B13",
+  fontSize: 17,
+  fontWeight: "800",
+  marginTop: 6,
+  marginBottom: 20,
+},
+
+receiptCard: {
+  width: "100%",
+  backgroundColor: "#FFFFFF",
+  borderRadius: 20,
+  padding: 18,
+  borderWidth: 1,
+  borderColor: "#F4CAAA",
+},
+
+receiptRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  marginBottom: 12,
+},
+
+receiptLabel: {
+  color: "#8A5A3D",
+  fontWeight: "700",
+},
+
+receiptValue: {
+  color: "#3E1908",
+  fontWeight: "900",
+  maxWidth: "60%",
+  textAlign: "right",
+},
+
+qrBox: {
+  alignItems: "center",
+  marginTop: 16,
+},
+
+doneBtn: {
+  backgroundColor: "#D35400",
+  width: "100%",
+  paddingVertical: 16,
+  borderRadius: 18,
+  alignItems: "center",
+  marginTop: 20,
+},
+
+doneBtnText: {
+  color: "#FFF",
+  fontSize: 17,
+  fontWeight: "900",
+},
 });
