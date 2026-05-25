@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,7 +18,9 @@ const bhawans = [
     distance: "1.2 km",
     description:
       "Spiritual accommodation and devotional gathering place for pilgrims.",
-    image:require('../../assets/rambhawan.jpeg'),
+    image: require("../../assets/rambhawan.jpeg"),
+    lat: 26.7988,
+    lng: 82.2024,
   },
   {
     id: 2,
@@ -26,7 +29,9 @@ const bhawans = [
     distance: "2.0 km",
     description:
       "Pilgrim stay facility with devotional ambiance and prayer spaces.",
-    image:require('../../assets/sitabhawan.jpeg'),
+    image: require("../../assets/sitabhawan.jpeg"),
+    lat: 26.7969,
+    lng: 82.2007,
   },
   {
     id: 3,
@@ -35,7 +40,9 @@ const bhawans = [
     distance: "1.8 km",
     description:
       "Traditional religious rest house near major pilgrimage locations.",
-    image:require('../../assets/hanumanbhawan.jpeg'),
+    image: require("../../assets/hanumanbhawan.jpeg"),
+    lat: 26.7999,
+    lng: 82.2039,
   },
   {
     id: 4,
@@ -44,8 +51,9 @@ const bhawans = [
     distance: "0.9 km",
     description:
       "Dedicated stay facility for pilgrims visiting Ram Mandir and Ayodhya.",
-    image:
-      require('../../assets/kanakbhawan.jpeg'),
+    image: require("../../assets/kanakbhawan.jpeg"),
+    lat: 26.8006,
+    lng: 82.2053,
   },
   {
     id: 5,
@@ -54,8 +62,9 @@ const bhawans = [
     distance: "2.7 km",
     description:
       "Comfortable bhawan with spiritual surroundings for group travelers.",
-    image:
-      require('../../assets/rambhawan.jpeg'),
+    image: require("../../assets/rambhawan.jpeg"),
+    lat: 26.7948,
+    lng: 82.1985,
   },
   {
     id: 6,
@@ -64,8 +73,9 @@ const bhawans = [
     distance: "3.4 km",
     description:
       "Modern devotional stay option for pilgrims and family groups.",
-    image:
-      require('../../assets/sitabhawan.jpeg'),
+    image: require("../../assets/sitabhawan.jpeg"),
+    lat: 26.7926,
+    lng: 82.1961,
   },
 ];
 
@@ -101,6 +111,17 @@ export default function BhawansPage() {
             </View>
 
             <Text style={styles.description}>{bhawan.description}</Text>
+            <TouchableOpacity
+  style={styles.button}
+  onPress={() =>
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&destination=${bhawan.lat},${bhawan.lng}`
+    )
+  }
+>
+  <Ionicons name="navigate" size={18} color="#FFF" />
+  <Text style={styles.buttonText}>Navigate</Text>
+</TouchableOpacity>
 
             
           </View>
@@ -178,12 +199,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
-  button: {
-    backgroundColor: "#EA580C",
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: "center",
-  },
+button: {
+  backgroundColor: "#EA580C",
+  paddingVertical: 14,
+  borderRadius: 14,
+  alignItems: "center",
+  flexDirection: "row",
+  justifyContent: "center",
+  gap: 8,
+},
 
   buttonText: {
     color: "#FFF",

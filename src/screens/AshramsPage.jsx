@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,7 +18,9 @@ const ashrams = [
     distance: "1.1 km",
     description:
       "Spiritual retreat center offering meditation, prayer, and pilgrim stay.",
-    image:require('../../assets/ramashram.jpeg'),
+    image: require("../../assets/ramashram.jpeg"),
+    lat: 26.7993,
+    lng: 82.2034,
   },
   {
     id: 2,
@@ -26,8 +29,9 @@ const ashrams = [
     distance: "2.4 km",
     description:
       "Traditional devotional ashram near major Ayodhya temple locations.",
-    image:require('../../assets/hanumanashram.jpeg'),
-      // "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+    image: require("../../assets/hanumanashram.jpeg"),
+    lat: 26.7978,
+    lng: 82.2016,
   },
   {
     id: 3,
@@ -36,8 +40,9 @@ const ashrams = [
     distance: "3.1 km",
     description:
       "Peaceful riverside spiritual retreat ideal for prayer and meditation.",
-    image:require('../../assets/sarayuashram.jpeg'),
-      // "https://images.unsplash.com/photo-1445019980597-93fa8acb246c",
+    image: require("../../assets/sarayuashram.jpeg"),
+    lat: 26.8057,
+    lng: 82.2108,
   },
   {
     id: 4,
@@ -46,8 +51,9 @@ const ashrams = [
     distance: "1.8 km",
     description:
       "Devotional ashram with spiritual guidance and pilgrim accommodation.",
-    image:require('../../assets/sitaashram.jpeg'),
-      // "https://images.unsplash.com/photo-1578683010236-d716f9a3f461",
+    image: require("../../assets/sitaashram.jpeg"),
+    lat: 26.7962,
+    lng: 82.1999,
   },
   {
     id: 5,
@@ -56,8 +62,9 @@ const ashrams = [
     distance: "2.9 km",
     description:
       "Modern spiritual center for satsang, meditation, and group pilgrimages.",
-    image:require('../../assets/ayodhyaashram.jpeg'),
-      // "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+    image: require("../../assets/ayodhyaashram.jpeg"),
+    lat: 26.7934,
+    lng: 82.1971,
   },
   {
     id: 6,
@@ -66,7 +73,9 @@ const ashrams = [
     distance: "4.2 km",
     description:
       "Sacred retreat focused on yoga, scriptures, and spiritual learning.",
-    image:require('../../assets/vedanthaashram.jpeg'),
+    image: require("../../assets/vedanthaashram.jpeg"),
+    lat: 26.7906,
+    lng: 82.1945,
   },
 ];
 
@@ -102,6 +111,17 @@ export default function AshramsPage() {
             </View>
 
             <Text style={styles.description}>{ashram.description}</Text>
+            <TouchableOpacity
+  style={styles.button}
+  onPress={() =>
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&destination=${ashram.lat},${ashram.lng}`
+    )
+  }
+>
+  <Ionicons name="navigate" size={18} color="#FFF" />
+  <Text style={styles.buttonText}>Navigate</Text>
+</TouchableOpacity>
 
             
           </View>
@@ -179,12 +199,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
-  button: {
-    backgroundColor: "#EA580C",
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: "center",
-  },
+button: {
+  backgroundColor: "#EA580C",
+  paddingVertical: 14,
+  borderRadius: 14,
+  alignItems: "center",
+  flexDirection: "row",
+  justifyContent: "center",
+  gap: 8,
+},
 
   buttonText: {
     color: "#FFF",

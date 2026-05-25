@@ -15,32 +15,63 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
 
-  const stats = [
-    {
-      value: "6",
-      label: "Pilgrimages",
-      icon: "library",
-      screen: "Temples",
-    },
-    {
-      value: "4",
-      label: "Aarti Slots",
-      icon: "flame",
-      screen: "AartiSlots",
-    },
-    {
-      value: "16",
-      label: "Cottages Left",
-      icon: "bed",
-      screen: "RoomDetails",
-    },
-    {
-      value: "8",
-      label: "Tourist Guides",
-      icon: "people",
-      screen: "GuideDetails",
-    },
-  ];
+ const stats = [
+  {
+    value: "6",
+    label: "Pilgrimages",
+    icon: "library",
+    screen: "Temples",
+  },
+  {
+    value: "4",
+    label: "Aarti Slots",
+    icon: "flame",
+    screen: "AartiSlots",
+  },
+  {
+    value: "16",
+    label: "Cottages Left",
+    icon: "bed",
+    screen: "RoomDetails",
+  },
+  {
+    value: "8",
+    label: "Tourist Guides",
+    icon: "people",
+    screen: "GuideDetails",
+  },
+  {
+    value: "12+",
+    label: "Ghats",
+    icon: "library",
+    screen: "Ghats",
+  },
+  {
+    value: "25+",
+    label: "Charity",
+    icon: "heart",
+    screen: "Charity",
+  },
+  {
+    value: "8+",
+    label: "Kunds",
+    icon: "home",
+    screen: "Kunds",
+  },
+  {
+    value: "15+",
+    label: "Bhawans",
+    icon: "business",
+    screen: "Bhawans",
+  },
+  {
+    value: "20+",
+    label: "Ashrams",
+    icon: "home",
+    screen: "Ashrams",
+  },
+];
+
 
   const services = [
     {
@@ -575,19 +606,21 @@ leaderImage: {
     color: "#C94B13",
     fontWeight: "900",
   },
-  statsRow: {
-    flexDirection: "row",
-    gap: 9,
-  },
-  statCard: {
-    flex: 1,
-    backgroundColor: "#FFF9F2",
-    borderRadius: 18,
-    paddingVertical: 12,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#F4CAAA",
-  },
+ statsRow: {
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "space-between",
+  gap: 10,
+},
+ statCard: {
+  width: "31%",
+  backgroundColor: "#FFF9F2",
+  borderRadius: 18,
+  paddingVertical: 14,
+  alignItems: "center",
+  borderWidth: 1,
+  borderColor: "#F4CAAA",
+},
   statValue: {
     color: "#C94B13",
     fontSize: 20,
