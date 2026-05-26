@@ -176,7 +176,7 @@ const donations = [
     {
       title: "Ram Janmabhoomi",
       text: "Main darshan route and crowd alerts.",
-      image: require("../../assets/1.avif"),
+      image: require("../../assets/rambhoomi.jpeg"),
       screen: "Map",
     },
     {
@@ -218,8 +218,8 @@ const donations = [
     },
   ];
 
-  const openBooking = (bookingType) => {
-    navigation.navigate("Bookings", { bookingType });
+  const openBooking = () => {
+    navigation.navigate("DarshanBooking");
   };
 
   const openService = (item) => {
@@ -266,7 +266,7 @@ const donations = [
             <TouchableOpacity
               style={styles.primaryButton}
               activeOpacity={0.86}
-              onPress={() => openBooking("Darshan")}
+              onPress={openBooking}
             >
               <Ionicons name="ticket" size={18} color="#fff" />
               <Text style={styles.primaryButtonText}>Book Darshan</Text>
