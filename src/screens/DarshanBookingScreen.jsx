@@ -21,7 +21,7 @@ export default function DarshanBookingScreen() {
       timing: "6:00 AM - 10:00 PM",
       crowd: "High",
       vip: "Available",
-      image: require("../../assets/1.avif"),
+      image: require("../../assets/5.jpg"),
     },
     {
       id: 2,
@@ -94,6 +94,7 @@ const [selectedTempleData, setSelectedTempleData] = useState(null);
         </View>
 
         <Text style={styles.sectionTitle}>Nearby Temples</Text>
+        <Text style={styles.sectionHint}>Select a temple to enter pilgrim details and book a pass.</Text>
 
         {temples.map((temple) => (
           <TouchableOpacity
@@ -353,6 +354,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "900",
     color: "#3E1908",
+    marginBottom: 6,
+  },
+  sectionHint: {
+    color: "#8A5A3D",
+    fontWeight: "700",
+    lineHeight: 20,
     marginBottom: 16,
   },
   templeCard: {
