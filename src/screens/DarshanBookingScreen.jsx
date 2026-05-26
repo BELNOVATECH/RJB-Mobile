@@ -166,6 +166,7 @@ const [selectedTempleData, setSelectedTempleData] = useState(null);
 
         <TextInput
           placeholder="Full Name"
+          placeholderTextColor="#8A5A3D"
           style={styles.input}
           value={form.name}
           onChangeText={(text) => setForm({ ...form, name: text })}
@@ -173,6 +174,7 @@ const [selectedTempleData, setSelectedTempleData] = useState(null);
 
         <TextInput
           placeholder="Mobile Number"
+          placeholderTextColor="#8A5A3D"
           keyboardType="phone-pad"
           style={styles.input}
           value={form.mobile}
@@ -181,6 +183,7 @@ const [selectedTempleData, setSelectedTempleData] = useState(null);
 
         <TextInput
           placeholder="Aadhaar Number"
+          placeholderTextColor="#8A5A3D"
           keyboardType="numeric"
           style={styles.input}
           value={form.aadhaar}
@@ -189,6 +192,7 @@ const [selectedTempleData, setSelectedTempleData] = useState(null);
 
         <TextInput
           placeholder="Number of Pilgrims"
+          placeholderTextColor="#8A5A3D"
           keyboardType="numeric"
           style={styles.input}
           value={form.pilgrims}
@@ -197,6 +201,7 @@ const [selectedTempleData, setSelectedTempleData] = useState(null);
 
         <TextInput
           placeholder="Visit Date"
+          placeholderTextColor="#8A5A3D"
           style={styles.input}
           value={form.date}
           onChangeText={(text) => setForm({ ...form, date: text })}
@@ -204,6 +209,7 @@ const [selectedTempleData, setSelectedTempleData] = useState(null);
 
         <TextInput
           placeholder="Preferred Time Slot"
+          placeholderTextColor="#8A5A3D"
           style={styles.input}
           value={form.slot}
           onChangeText={(text) => setForm({ ...form, slot: text })}
@@ -418,6 +424,9 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#FFF",
+    color: "#3E1908",
+    fontSize: 16,
+    fontWeight: "600",
     borderRadius: 16,
     paddingHorizontal: 16,
     height: 56,
