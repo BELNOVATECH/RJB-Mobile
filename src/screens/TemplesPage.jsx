@@ -18,7 +18,7 @@ const temples = [
     distance: '0.2 km',
     description:
       'Sacred birthplace of Lord Rama and the main spiritual destination in Ayodhya.',
-    image: require('../../assets/1.avif'),
+    image: require('../../assets/rambhoomi.jpeg'),
     lat: 26.7996,
     lng: 82.2042,
   },

@@ -126,7 +126,7 @@ export default function HomeScreen() {
     {
       title: "Ram Janmabhoomi",
       text: "Main darshan route and crowd alerts.",
-      image: require("../../assets/1.avif"),
+      image: require("../../assets/rambhoomi.jpeg"),
       screen: "Map",
     },
     {
@@ -168,8 +168,8 @@ export default function HomeScreen() {
     },
   ];
 
-  const openBooking = (bookingType) => {
-    navigation.navigate("Bookings", { bookingType });
+  const openBooking = () => {
+    navigation.navigate("DarshanBooking");
   };
 
   const openService = (item) => {
@@ -216,7 +216,7 @@ export default function HomeScreen() {
             <TouchableOpacity
               style={styles.primaryButton}
               activeOpacity={0.86}
-              onPress={() => openBooking("Darshan")}
+              onPress={openBooking}
             >
               <Ionicons name="ticket" size={18} color="#fff" />
               <Text style={styles.primaryButtonText}>Book Darshan</Text>
