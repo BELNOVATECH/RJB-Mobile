@@ -7,6 +7,7 @@ import {
   ScrollView,
   Modal,
   Image,
+  TextInput,
 } from "react-native";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -14,6 +15,55 @@ import { useNavigation } from "@react-navigation/native";
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
+  const [donationVisible, setDonationVisible] = useState(false);
+const [donationSuccessVisible, setDonationSuccessVisible] = useState(false);
+const [selectedDonation, setSelectedDonation] = useState(null);
+
+const [donationForm, setDonationForm] = useState({
+  name: "",
+  mobile: "",
+  amount: "",
+  purpose: "",
+  temple: "",
+});
+const donations = [
+  {
+    title: "Temple Seva",
+    icon: "business",
+    amount: "501",
+    description: "Offer seva to temple rituals",
+  },
+  {
+    title: "Annadanam",
+    icon: "restaurant",
+    amount: "1001",
+    description: "Sponsor sacred meals for pilgrims",
+  },
+  {
+    title: "Charity Support",
+    icon: "heart",
+    amount: "751",
+    description: "Support needy devotees",
+  },
+  {
+    title: "Ashram Support",
+    icon: "home",
+    amount: "1501",
+    description: "Contribute to spiritual shelters",
+  },
+  {
+    title: "Gau Seva",
+    icon: "paw",
+    amount: "901",
+    description: "Cow feeding & care donation",
+  },
+  {
+    title: "Pilgrim Welfare",
+    icon: "people",
+    amount: "1201",
+    description: "Support yatra assistance",
+  },
+];
 
  const stats = [
   {
@@ -287,6 +337,37 @@ export default function HomeScreen() {
             </TouchableOpacity>
           ))}
         </View>
+        <Text style={styles.sectionTitle}>Sacred Donations</Text>
+
+<View style={styles.grid}>
+  {donations.map((item) => (
+    <TouchableOpacity
+      key={item.title}
+      style={styles.donationCard}
+      activeOpacity={0.9}
+      onPress={() => {
+        setSelectedDonation(item);
+        setDonationForm({
+          ...donationForm,
+          amount: item.amount,
+          purpose: item.title,
+        });
+        setDonationVisible(true);
+      }}
+    >
+      <View style={styles.donationIcon}>
+        <Ionicons name={item.icon} size={24} color="#D35400" />
+      </View>
+
+      <Text style={styles.donationTitle}>{item.title}</Text>
+      <Text style={styles.donationText}>{item.description}</Text>
+
+      <View style={styles.amountBadge}>
+        <Text style={styles.amountBadgeText}>₹{item.amount}</Text>
+      </View>
+    </TouchableOpacity>
+  ))}
+</View>
 
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Darshan Timings</Text>
@@ -416,6 +497,138 @@ export default function HomeScreen() {
       </ScrollView>
 
       <Modal
+  visible={donationVisible}
+  transparent
+  animationType="slide"
+>
+  <View style={styles.popupOverlay}>
+    <View style={styles.donationPopup}>
+      <TouchableOpacity
+        style={styles.popupClose}
+        onPress={() => setDonationVisible(false)}
+      >
+        <Ionicons name="close" size={24} color="#3E1908" />
+      </TouchableOpacity>
+
+      <Text style={styles.popupTitle}>
+        {selectedDonation?.title}
+      </Text>
+
+      <Text style={styles.popupSubtitle}>
+        Offer your sacred contribution
+      </Text>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <TextInput
+          placeholder="Full Name"
+          style={styles.input}
+          value={donationForm.name}
+          onChangeText={(text) =>
+            setDonationForm({ ...donationForm, name: text })
+          }
+        />
+
+        <TextInput
+          placeholder="Mobile Number"
+          keyboardType="phone-pad"
+          style={styles.input}
+          value={donationForm.mobile}
+          onChangeText={(text) =>
+            setDonationForm({ ...donationForm, mobile: text })
+          }
+        />
+
+        <TextInput
+          placeholder="Temple / Organization"
+          style={styles.input}
+          value={donationForm.temple}
+          onChangeText={(text) =>
+            setDonationForm({ ...donationForm, temple: text })
+          }
+        />
+
+        <TextInput
+          placeholder="Amount"
+          keyboardType="numeric"
+          style={styles.input}
+          value={donationForm.amount}
+          onChangeText={(text) =>
+            setDonationForm({ ...donationForm, amount: text })
+          }
+        />
+
+        <TextInput
+          placeholder="Purpose / Message"
+          multiline
+          style={styles.textArea}
+          value={donationForm.purpose}
+          onChangeText={(text) =>
+            setDonationForm({ ...donationForm, purpose: text })
+          }
+        />
+
+        <TouchableOpacity
+          style={styles.donateButton}
+          onPress={() => {
+            setDonationVisible(false);
+            setDonationSuccessVisible(true);
+          }}
+        >
+          <Text style={styles.donateButtonText}>
+            Donate Now
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+  </View>
+</Modal>
+<Modal
+  visible={donationSuccessVisible}
+  transparent
+  animationType="fade"
+>
+  <View style={styles.popupOverlay}>
+    <View style={styles.successPopup}>
+      <Ionicons
+        name="checkmark-circle"
+        size={85}
+        color="#22C55E"
+      />
+
+      <Text style={styles.successTitle}>
+        Donation Successful
+      </Text>
+
+      <Text style={styles.successBlessing}>
+        May Lord Rama bless your seva
+      </Text>
+
+      <View style={styles.receiptCard}>
+        <Text style={styles.receiptText}>
+          Receipt ID: DON-{Math.floor(Math.random() * 999999)}
+        </Text>
+        <Text style={styles.receiptText}>
+          Type: {selectedDonation?.title}
+        </Text>
+        <Text style={styles.receiptText}>
+          Amount: ₹{donationForm.amount}
+        </Text>
+        <Text style={styles.receiptText}>
+          Donor: {donationForm.name}
+        </Text>
+      </View>
+
+      <TouchableOpacity
+        style={styles.doneButton}
+        onPress={() => setDonationSuccessVisible(false)}
+      >
+        <Text style={styles.doneButtonText}>Done</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
+
+      <Modal
         visible={menuVisible}
         transparent
         animationType="fade"
@@ -461,7 +674,9 @@ export default function HomeScreen() {
             ))}
           </View>
         </View>
+        
       </Modal>
+      
     </View>
   );
 }
@@ -1032,4 +1247,157 @@ leaderImage: {
     fontSize: 13,
     lineHeight: 18,
   },
+ donationCard: {
+  width: "48%",
+  minHeight: 230,
+  backgroundColor: "#FFF9F2",
+  borderRadius: 22,
+  padding: 16,
+  borderWidth: 1,
+  borderColor: "#F4CAAA",
+  justifyContent: "space-between",
+},
+donationIcon: {
+  width: 50,
+  height: 50,
+  borderRadius: 18,
+  backgroundColor: "#FFE2C9",
+  justifyContent: "center",
+  alignItems: "center",
+},
+
+donationTitle: {
+  color: "#3E1908",
+  fontWeight: "900",
+  fontSize: 15,
+  marginTop: 12,
+},
+
+donationText: {
+  color: "#8A5A3D",
+  fontSize: 12,
+  lineHeight: 17,
+  marginTop: 6,
+  minHeight: 38,
+},
+
+amountBadge: {
+  marginTop: 12,
+  backgroundColor: "#D35400",
+  paddingVertical: 8,
+  borderRadius: 999,
+  alignItems: "center",
+},
+
+amountBadgeText: {
+  color: "#fff",
+  fontWeight: "900",
+},
+
+popupOverlay: {
+  flex: 1,
+  backgroundColor: "rgba(0,0,0,0.55)",
+  justifyContent: "center",
+  padding: 16,
+},
+
+donationPopup: {
+  backgroundColor: "#FFF9F2",
+  borderRadius: 28,
+  padding: 22,
+  maxHeight: "85%",
+},
+
+popupClose: {
+  alignSelf: "flex-end",
+},
+
+popupTitle: {
+  color: "#3E1908",
+  fontSize: 24,
+  fontWeight: "900",
+},
+
+popupSubtitle: {
+  color: "#8A5A3D",
+  marginBottom: 16,
+},
+
+input: {
+  backgroundColor: "#fff",
+  borderWidth: 1,
+  borderColor: "#F4CAAA",
+  borderRadius: 16,
+  paddingHorizontal: 14,
+  height: 54,
+  marginBottom: 12,
+},
+
+textArea: {
+  backgroundColor: "#fff",
+  borderWidth: 1,
+  borderColor: "#F4CAAA",
+  borderRadius: 16,
+  padding: 14,
+  height: 110,
+  marginBottom: 14,
+},
+
+donateButton: {
+  backgroundColor: "#D35400",
+  borderRadius: 18,
+  paddingVertical: 16,
+  alignItems: "center",
+},
+
+donateButtonText: {
+  color: "#fff",
+  fontWeight: "900",
+},
+
+successPopup: {
+  backgroundColor: "#FFF9F2",
+  borderRadius: 30,
+  padding: 24,
+  alignItems: "center",
+},
+
+successTitle: {
+  fontSize: 24,
+  fontWeight: "900",
+  color: "#3E1908",
+  marginTop: 14,
+},
+
+successBlessing: {
+  color: "#8A5A3D",
+  marginTop: 6,
+},
+
+receiptCard: {
+  width: "100%",
+  backgroundColor: "#FFF1E4",
+  borderRadius: 18,
+  padding: 16,
+  marginTop: 20,
+},
+
+receiptText: {
+  color: "#3E1908",
+  fontWeight: "700",
+  marginBottom: 8,
+},
+
+doneButton: {
+  backgroundColor: "#22C55E",
+  paddingHorizontal: 30,
+  paddingVertical: 14,
+  borderRadius: 18,
+  marginTop: 20,
+},
+
+doneButtonText: {
+  color: "#fff",
+  fontWeight: "900",
+},
 });
